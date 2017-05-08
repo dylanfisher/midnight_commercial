@@ -1,0 +1,32 @@
+{
+  "name": "5andbox",
+  "version": "1.1.0",
+  "description": "Compiles Sass, autoprefixes, concatenates javascript, etc.",
+  "main": "main.js",
+  "dependencies": {
+    "gulp-sass": "^3.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.0",
+    "jshint": "^2.9.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanfisher/5andbox.git"
+  },
+  "author": "Dylan Fisher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanfisher/5andbox/issues"
+  },
+  "homepage": "https://github.com/dylanfisher/5andbox#readme"
+}
