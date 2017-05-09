@@ -1,0 +1,42 @@
+//
+// Footer
+//
+
+html,
+body {
+  height: 100%;
+}
+
+$footer-push-height: 2em;
+
+.footer-push-wrapper {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto (-$footer-push-height);
+}
+
+.footer,
+.footer-push {
+  height: $footer-push-height;
+}
+
+.footer {
+  position: relative;
+  margin: 0;
+}
+
+.footer__social {
+  @include breakpoint(sm) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.footer__social__item {
+  margin-left: $gutter;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}

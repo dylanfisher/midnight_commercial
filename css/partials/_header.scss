@@ -16,6 +16,10 @@
   a {
     @include blank-link-hover;
   }
+
+  @include breakpoint(sm) {
+    margin-bottom: 50px;
+  }
 }
 
 .menu {

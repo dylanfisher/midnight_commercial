@@ -11,6 +11,11 @@ foreach (glob(get_stylesheet_directory() . '/post-types/*.php') as $filename) {
   require_once $filename;
 }
 
+// Custom taxonomies
+foreach (glob(get_stylesheet_directory() . '/taxonomies/*.php') as $filename) {
+  require_once $filename;
+}
+
 // Security
 foreach (glob(get_stylesheet_directory() . '/functions/wordpress_security/*.php') as $filename) {
   require_once $filename;

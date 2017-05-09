@@ -8,10 +8,10 @@ function sandbox_image($acf_image_field_name='image', $image_size='large', $clas
   if(empty($alt)) $alt = $image['title'];
   $size = $image_size;
   $url = $image['sizes'][$size];
-  $url_small = $image['sizes']['small'];
+  $url_large = $image['sizes']['large'];
   $width = $image['sizes'][$size.'-width'];
   $height = $image['sizes'][$size.'-height'];
-  echo '<img src="'.$url_small.'" data-src="'.$url.'" width="'.$width.'" height="'.$height.'" alt="'.$alt.'" class="sandbox-image '.$classes.'">';
+  echo '<img src="'.$url.'" width="'.$width.'" height="'.$height.'" alt="'.$alt.'" class="sandbox-image '.$classes.'">';
 }
 
 // Get <img> tags from a ACF repeater
