@@ -1,0 +1,33 @@
+//
+// Interlace
+//
+
+.interlace {
+  position: relative;
+}
+
+.interlace-item {
+  position: relative;
+  z-index: -1;
+
+  &.active {
+    color: transparent;
+  }
+}
+
+.interlace-clone-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.interlace-clone {
+  position: relative;
+  overflow: hidden;
+}
+
+.interlace-clone__content {
+  position: relative;
+}

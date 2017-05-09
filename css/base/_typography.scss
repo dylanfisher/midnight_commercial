@@ -1,6 +1,7 @@
 html {
   @include breakpoint(sm) {
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 }
 

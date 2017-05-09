@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////
 
 // Font stacks
-$font-stack__regular : sans-serif;
+$sans-serif: sans-serif;
 
 ///////////////////////////////////////////////////
 // Typography definitions
@@ -11,8 +11,20 @@ $font-stack__regular : sans-serif;
 
 // Regular
 @mixin font--regular {
-  font-family: $font-stack__regular;
-  font-size:      16px;
+  font-family: $sans-serif;
+  font-size:      18px;
+  line-height:    1.4;
+  letter-spacing: 0px;
+
+  @include breakpoint(sm) {
+    font-size: 24px;
+  }
+}
+
+// Small
+@mixin font--small {
+  font-family: $sans-serif;
+  font-size:      14px;
   line-height:    1.4;
   letter-spacing: 0px;
 

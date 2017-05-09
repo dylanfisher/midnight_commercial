@@ -1,0 +1,37 @@
+//
+// Header
+//
+
+.site-title,
+.nav,
+.nav .menu-item {
+  display: inline-block;
+}
+
+.header {
+  margin-top: $gutter;
+  margin-bottom: $gutter;
+  position: relative;
+
+  a {
+    @include blank-link-hover;
+  }
+}
+
+.menu {
+  @include blank-list;
+
+  @include breakpoint(sm) {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .menu-item {
+      margin-left: $gutter;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}

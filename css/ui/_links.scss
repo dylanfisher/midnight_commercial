@@ -1,3 +1,22 @@
 //
 // Links
 //
+
+a {
+  color: inherit;
+}
+
+@mixin blank-link {
+  text-decoration: none;
+  border-bottom: 0;
+}
+.blank-link { @include blank-link; }
+
+@mixin blank-link-hover {
+  @include blank-link;
+
+  &:hover {
+    border-bottom: 1px solid;
+  }
+}
+.blank-link-hover { @include blank-link-hover; }
