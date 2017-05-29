@@ -3,8 +3,26 @@
 //
 
 .project-collage {
-  margin-top: $space-jumbo;
-  margin-bottom: $space-jumbo;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  &:first-child {
+    margin-top: 100px;
+
+    @include breakpoint(sm) {
+      margin-top: 180px;
+    }
+  }
+
+  @include breakpoint(sm) {
+    margin-top: 240px;
+    margin-bottom: 240px;
+  }
+
+  @include breakpoint(lg) {
+    margin-top: 320px;
+    margin-bottom: 320px;
+  }
 }
 
 .project-collage__title-area {

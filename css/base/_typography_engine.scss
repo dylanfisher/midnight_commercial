@@ -1,13 +1,5 @@
-///////////////////////////////////////////////////
-// Typography Variables
-///////////////////////////////////////////////////
-
 // Font stacks
 $sans-serif: 'calibre_regular', sans-serif;
-
-///////////////////////////////////////////////////
-// Typography definitions
-///////////////////////////////////////////////////
 
 // Regular
 @mixin font--regular {
@@ -30,7 +22,7 @@ $sans-serif: 'calibre_regular', sans-serif;
   letter-spacing: 0px;
 
   @include breakpoint(sm) {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 .font-small { @include font--small; }

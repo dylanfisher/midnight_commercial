@@ -2,10 +2,38 @@
 // Single project
 //
 
+.entry-title {
+  position: relative;
+}
+
+.next-previous-post-link {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 38px;
+  line-height: 1;
+
+  a {
+    @include blank-link;
+  }
+}
+
+.next-post-link {
+  left: 0;
+}
+
+.previous-post-link {
+  right: 0;
+}
+
 .project__featured-image {
   margin-bottom: 50px;
 }
 
 .project__description-area {
   margin-bottom: 75px;
+}
+
+.project__metadata-wrapper {
+  margin-top: 2em;
 }
