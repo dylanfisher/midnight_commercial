@@ -13,10 +13,6 @@ function sandbox_image($acf_image_field_name='image', $image_size='large', $clas
   $height = $image['sizes'][$size.'-height'];
 
   echo '<img src="'.$url.'" width="'.$width.'" height="'.$height.'" alt="'.$alt.'" class="sandbox-image '.$classes.'">';
-
-  if ( !empty( $image['caption'] ) ):
-    echo '<div class="image-caption font-small">' . $image['caption'] . '</div>';
-  endif;
 }
 
 // Get <img> tags from a ACF repeater

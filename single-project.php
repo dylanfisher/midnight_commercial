@@ -11,7 +11,11 @@
   </h2>
   <div class="ta-c">
     <div class="project__featured-image">
-      <?php sandbox_image( 'featured_image', 'large' ); ?>
+      <div class="interlace interlace-large">
+        <div class="interlace-item">
+          <?php sandbox_image( 'featured_image', 'large' ); ?>
+        </div>
+      </div>
     </div>
   </div>
   <div class="project__description-area row">

@@ -12,13 +12,16 @@ App.interlace = function(options) {
   var mouseIdle            = 200;
   var idleTime             = 0;
   var genSpot              = randomZeroMouseSpot();
-  var el;
   var $cloneWrapper;
   var $clones;
 
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
   var sliceRatio = 4.66;
+
+  if ( $container.hasClass('interlace-large') ) {
+    sliceRatio = 10;
+  }
 
   // params
   var $original      = $container.find('.interlace-item'); // original that's hidden on the page
@@ -111,7 +114,7 @@ App.interlace = function(options) {
       };
       processShiftsOrig[i] = shiftVals[i].px;
     }
-    console.log('shiftVals', shiftVals);
+    // console.log('shiftVals', shiftVals);
   }
 
   function sliceDivs(startInt) {
@@ -221,6 +224,8 @@ App.interlace = function(options) {
     var idleInterval = setInterval( timerIncrement, mouseIdle );
 
     $(window).mousemove(function(e) {
+      // Stop all running animations when mouse movement starts
+      $clones.find('.interlace-clone__content').finish();
       idleTime = 0;
       mode = 'mouse';
       moveDivs();
