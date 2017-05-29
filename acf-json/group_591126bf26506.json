@@ -3,10 +3,37 @@
     "title": "Project",
     "fields": [
         {
-            "key": "field_591128b880367",
-            "label": "Featured Image",
-            "name": "featured_image",
-            "type": "image",
+            "key": "field_592c5225e17b0",
+            "label": "Title Position",
+            "name": "title_position",
+            "type": "select",
+            "instructions": "Select the title alignment on the project index.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "left",
+                "right": "right"
+            },
+            "default_value": [
+                "left"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_592c48bf19961",
+            "label": "Featured Media",
+            "name": "featured_media",
+            "type": "flexible_content",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,16 +42,260 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "array",
-            "preview_size": "thumbnail",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
+            "layouts": {
+                "592c48d30f525": {
+                    "key": "592c48d30f525",
+                    "name": "image",
+                    "label": "Image",
+                    "display": "table",
+                    "sub_fields": [
+                        {
+                            "key": "field_592c48e319963",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_592c4be3316b3",
+                            "label": "Columns",
+                            "name": "columns",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 2,
+                            "max": 12,
+                            "step": 1
+                        },
+                        {
+                            "key": "field_592c53d5b7d17",
+                            "label": "Column Offset",
+                            "name": "column_offset",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": 10,
+                            "step": 1
+                        },
+                        {
+                            "key": "field_592c562981e8a",
+                            "label": "Vertical Offset",
+                            "name": "vertical_offset",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 20,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": 100,
+                            "step": 1
+                        },
+                        {
+                            "key": "field_592c59862a3da",
+                            "label": "Z-Index",
+                            "name": "z_index",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": "",
+                            "step": 1
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "592c48ed19965": {
+                    "key": "592c48ed19965",
+                    "name": "video",
+                    "label": "Video",
+                    "display": "table",
+                    "sub_fields": [
+                        {
+                            "key": "field_592c48f019966",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "url",
+                            "instructions": "Use .mp4 videos. Paste the URL to the direct video file here. If you are hosting the video on Wordpress, you'll have to first add the video the the Wordpress media library, then copy the direct URL from there.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_592c4c48316b4",
+                            "label": "Columns",
+                            "name": "columns",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 2,
+                            "max": 12,
+                            "step": 1
+                        },
+                        {
+                            "key": "field_592c53f0b7d18",
+                            "label": "Column Offset",
+                            "name": "column_offset",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": 10,
+                            "step": 1
+                        },
+                        {
+                            "key": "field_592c55bb81e87",
+                            "label": "Vertical Offset",
+                            "name": "vertical_offset",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 20,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": 100,
+                            "step": 1
+                        },
+                        {
+                            "key": "field_592c5998dba31",
+                            "label": "Z-Index",
+                            "name": "z_index",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": "",
+                            "step": 1
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Add Media",
+            "min": 1,
+            "max": 3
+        },
+        {
+            "key": "field_592c561381e88",
+            "label": "Vertical Offset",
+            "name": "vertical_offset",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 20,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 0,
+            "max": 100,
+            "step": 1
         },
         {
             "key": "field_59112e339c9f2",
@@ -48,6 +319,27 @@
             "disabled": 0
         },
         {
+            "key": "field_592c486a40f1f",
+            "label": "Year",
+            "name": "year",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
             "key": "field_591129807feb3",
             "label": "Description",
             "name": "description",
@@ -63,7 +355,8 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "basic",
-            "media_upload": 0
+            "media_upload": 0,
+            "delay": 0
         },
         {
             "key": "field_591126d2234f9",
@@ -81,7 +374,8 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "basic",
-            "media_upload": 0
+            "media_upload": 0,
+            "delay": 0
         },
         {
             "key": "field_5911291280368",
@@ -156,5 +450,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1494300979
+    "modified": 1496078818
 }
