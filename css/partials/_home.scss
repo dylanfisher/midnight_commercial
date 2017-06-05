@@ -3,8 +3,11 @@
 //
 
 .interlaced-logo-wrapper {
-  width: 100%;
-  margin-top: 50px;
   text-align: center;
-  font-size: 100px;
+  font-size: 10vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }

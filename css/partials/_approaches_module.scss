@@ -1,0 +1,49 @@
+//
+// Approaches module
+//
+
+.approaches {
+  margin: 2em auto 4em;
+  text-align: center;
+  max-width: 688px;
+}
+
+.approach {
+  margin-bottom: 0.5em;
+
+  &:before {
+    content: '';
+    width: 2px;
+    height: 80px;
+    background: $white;
+    display: block;
+    margin: 0.75em auto;
+  }
+
+  &:first-child {
+    &:before {
+      content: none;
+    }
+  }
+}
+
+.approach__index {
+  display: inline-block;
+  border: 2px solid;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.approach__index__number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.approach__title {
+  margin-bottom: 1em;
+}

@@ -10,15 +10,22 @@
 
 .header {
   margin-top: $gutter;
-  margin-bottom: $gutter;
+  margin-bottom: 2em;
   position: relative;
 
   a {
     @include blank-link-hover;
   }
+}
 
-  @include breakpoint(sm) {
-    margin-bottom: 50px;
+.nav {
+  @include breakpoint(xs) {
+    display: block;
+    margin-top: 5px;
+
+    .menu-item {
+      margin-right: 7px;
+    }
   }
 }
 
@@ -37,5 +44,12 @@
         margin-left: 0;
       }
     }
+  }
+}
+
+.current-menu-item,
+.current_page_item {
+  a {
+    border-bottom: 1px solid;
   }
 }
