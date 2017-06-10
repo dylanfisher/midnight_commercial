@@ -1,9 +1,14 @@
 // Modules
 
 .module {
-  margin-bottom: 150px;
+  margin-bottom: 2em;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
-.module-type--image {
-  margin-bottom: 2em;
+.module-type--text_modules,
+.module-type--two_column_text_module {
+  margin-bottom: 150px;
 }
