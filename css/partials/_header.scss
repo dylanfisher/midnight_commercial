@@ -9,12 +9,22 @@
 }
 
 .header {
-  margin-top: $gutter;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $black;
+  padding-top: $gutter;
   margin-bottom: 2em;
-  position: relative;
+  height: 60px;
+  z-index: 10;
 
   a {
     @include blank-link-hover;
+  }
+
+  .single-project & {
+    background-color: $white;
   }
 }
 
@@ -35,7 +45,7 @@
   @include breakpoint(sm) {
     position: absolute;
     top: 0;
-    right: 0;
+    right: $gutter;
 
     .menu-item {
       margin-left: 30px;

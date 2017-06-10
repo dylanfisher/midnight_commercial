@@ -38,12 +38,18 @@
 </head>
 <body <?php body_class(); ?>>
   <div class="footer-push-wrapper">
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="site-title">
+              <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
+            </h1>
+            <nav class="nav">
+              <?php wp_nav_menu(); ?>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
     <div class="container">
-      <header class="header">
-        <h1 class="site-title">
-          <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
-        </h1>
-        <nav class="nav">
-          <?php wp_nav_menu(); ?>
-        </nav>
-      </header>
