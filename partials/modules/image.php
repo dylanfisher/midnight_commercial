@@ -3,7 +3,7 @@
   <?php
     $image = get_sub_field( 'image' );
     if ( !empty( $image['caption'] ) ):
-      echo '<div class="image-caption font-small">' . $image['caption'] . '</div>';
+      echo '<div class="image-caption">' . $image['caption'] . '</div>';
     endif;
   ?>
 </div>

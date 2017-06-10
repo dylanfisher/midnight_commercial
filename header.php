@@ -39,7 +39,7 @@
 <body <?php body_class(); ?>>
   <div class="footer-push-wrapper">
     <header class="header">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
             <h1 class="site-title">
@@ -52,4 +52,5 @@
         </div>
       </div>
     </header>
-    <div class="container">
+    <div class="header-push"></div>
+    <div class="container-fluid">

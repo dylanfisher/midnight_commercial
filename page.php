@@ -6,7 +6,7 @@
         <?php
           if ( have_rows( 'modules' ) ):
             while ( have_rows( 'modules' ) ) : the_row();
-              echo '<div class="module">';
+              echo '<div class="module module-type--' . get_row_layout() . '">';
                 get_template_part( 'partials/page_modules/' . get_row_layout() );
               echo '</div>';
             endwhile;

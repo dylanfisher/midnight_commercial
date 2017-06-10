@@ -7,7 +7,7 @@ body {
   height: 100%;
 }
 
-$footer-push-height: 2em;
+$footer-push-height: 150px;
 
 .footer-push-wrapper {
   min-height: 100%;
@@ -23,6 +23,13 @@ $footer-push-height: 2em;
 .footer {
   position: relative;
   margin: 0;
+}
+
+.footer__content {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
 }
 
 .footer__social {

@@ -9,20 +9,7 @@ $sans-serif: 'calibre_regular', sans-serif;
   letter-spacing: 0px;
 
   @include breakpoint(sm) {
-    font-size: 26px;
+    font-size: 32px;
   }
 }
 .font-regular { @include font--regular; }
-
-// Small
-@mixin font--small {
-  font-family: $sans-serif;
-  font-size:      16px;
-  line-height:    1.1;
-  letter-spacing: 0px;
-
-  @include breakpoint(sm) {
-    font-size: 20px;
-  }
-}
-.font-small { @include font--small; }

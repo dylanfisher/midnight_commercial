@@ -14,9 +14,8 @@
   left: 0;
   width: 100%;
   background-color: $black;
-  padding-top: $gutter;
-  margin-bottom: 2em;
-  height: 60px;
+  padding-top: 11px;
+  height: $header-height;
   z-index: 10;
 
   a {
@@ -26,6 +25,11 @@
   .single-project & {
     background-color: $white;
   }
+}
+
+.header-push {
+  height: $header-height;
+  margin-bottom: 180px;
 }
 
 .nav {

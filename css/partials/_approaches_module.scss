@@ -3,7 +3,7 @@
 //
 
 .approaches {
-  margin: 2em auto 4em;
+  margin: 150px auto 4em;
   text-align: center;
   max-width: 688px;
 }
@@ -14,7 +14,7 @@
   &:before {
     content: '';
     width: 2px;
-    height: 80px;
+    height: 150px;
     background: $white;
     display: block;
     margin: 0.75em auto;

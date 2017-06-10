@@ -1,16 +1,18 @@
         <div class="footer-push"></div>
       </div><!-- .footer-push-wrapper -->
     </div><!-- .container -->
-    <div class="container">
-      <footer class="footer font-small">
-        <div>
-          &copy;
-          <?php echo date( 'Y' ); ?>
-          <?php bloginfo( 'name' ); ?>
-        </div>
-        <div class="footer__social">
-          <a href="https://twitter.com/midcomm" class="footer__social__item blank-link-hover" target="_blank">Twitter</a>
-          <a href="https://www.instagram.com/midnightcommercial/" class="footer__social__item blank-link-hover" target="_blank">Instagram</a>
+    <div class="container-fluid">
+      <footer class="footer">
+        <div class="footer__content">
+          <div>
+            &copy;
+            <?php echo date( 'Y' ); ?>
+            <?php bloginfo( 'name' ); ?>
+          </div>
+          <div class="footer__social">
+            <a href="https://twitter.com/midcomm" class="footer__social__item blank-link-hover" target="_blank">Twitter</a>
+            <a href="https://www.instagram.com/midnightcommercial/" class="footer__social__item blank-link-hover" target="_blank">Instagram</a>
+          </div>
         </div>
       </footer>
     </div>

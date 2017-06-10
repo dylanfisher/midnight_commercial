@@ -2,38 +2,49 @@
 // Single project
 //
 
+body.single-project {
+  &:before {
+    content: '';
+    background-color: $black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+    transition: opacity 1s;
+  }
+
+  &.transition-is-ready {
+    &:before {
+      opacity: 0;
+    }
+  }
+
+  &.transition-is-complete {
+    &:before {
+      content: none;
+    }
+  }
+
+  .header-push {
+    margin-bottom: 3em;
+  }
+}
+
 .entry-title {
   position: relative;
 }
 
-.next-previous-post-link {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 38px;
-  line-height: 1;
-
-  a {
-    @include blank-link;
-  }
-}
-
-.next-post-link {
-  left: 0;
-}
-
-.previous-post-link {
-  right: 0;
-}
-
 .project__featured-image {
-  margin-bottom: 50px;
+  margin-bottom: 3em;
 }
 
 .project__description-area {
-  margin-bottom: 75px;
+  margin-bottom: 3em;
 }
 
 .project__metadata-wrapper {
-  margin-top: 2em;
+  margin-top: 3em;
 }

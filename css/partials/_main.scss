@@ -9,6 +9,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.container-fluid {
+  max-width: $site-max-width;
+}
+
 .single-project {
   background-color: $white;
   color: $black;
@@ -16,10 +20,5 @@ body {
 }
 
 .entry-title {
-  text-align: center;
-  margin-bottom: $gutter;
-}
-
-.module {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }

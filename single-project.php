@@ -1,14 +1,5 @@
 <?php the_post(); ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-  <h2 class="entry-title">
-    <div class="next-post-link next-previous-post-link">
-      <?php next_post_link( '%link', '<' ); ?>
-    </div>
-    <?php the_title(); ?>
-    <div class="previous-post-link next-previous-post-link">
-      <?php previous_post_link( '%link', '>' ); ?>
-    </div>
-  </h2>
   <div class="ta-c">
     <div class="project__featured-image">
       <div class="interlace interlace-large">
@@ -18,13 +9,14 @@
       </div>
     </div>
   </div>
-  <div class="project__description-area row">
+  <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-      <?php the_field( 'description' ); ?>
-      <div class="project__metadata-wrapper">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="font-small">
+      <div class="project__description-area">
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+        <?php the_field( 'description' ); ?>
+        <div class="project__metadata-wrapper">
+          <div class="row">
+            <div class="col-sm-6">
               <?php
                 $types = get_the_terms( $post, 'project-type' );
                 $keywords = get_the_terms( $post, 'project-keyword' );
@@ -52,9 +44,7 @@
                 endif;
               ?>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="font-small">
+            <div class="col-sm-6">
               <?php the_field( 'metadata' ); ?>
             </div>
           </div>
@@ -65,7 +55,7 @@
   <?php
     if ( have_rows( 'modules' ) ):
       while ( have_rows( 'modules' ) ) : the_row();
-        echo '<div class="module">';
+        echo '<div class="module module-type--' . get_row_layout() . '">';
           get_template_part( 'partials/modules/' . get_row_layout() );
         echo '</div>';
       endwhile;

@@ -20,7 +20,7 @@
           $vertical_offset = get_sub_field( 'vertical_offset' );
 
           ob_start();
-            echo '<div class="project-collage-column project-collage-column--' . $index . ' col-sm-' . $columns . ' col-sm-offset-' . $column_offset . '" style="margin-top: -' . ($vertical_offset / 3) . '%; z-index: ' . get_sub_field( 'z_index' ) . ';">';
+            echo '<div class="project-collage-column project-collage-column--' . $index . ' col-xs-' . $columns . ' col-xs-offset-' . $column_offset . '" style="margin-top: -' . ($vertical_offset / 3) . '%; z-index: ' . get_sub_field( 'z_index' ) . ';">';
               echo '<a href="' . get_permalink() . '" class="blank-link">';
                 sandbox_get_template_part( 'partials/project_collage/' . get_row_layout(), array( 'columns' => $columns ) );
               echo '</a>';
@@ -28,7 +28,7 @@
           $content = ob_get_clean();
 
           if ( $columns <= 8 && $index >= 1 ) {
-            echo '<div class="col-sm-12 project-collage-row">';
+            echo '<div class="col-xs-12 project-collage-row">';
               echo '<div class="row">';
                 echo $content;
               echo '</div>';
