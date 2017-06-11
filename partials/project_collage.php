@@ -7,8 +7,12 @@
           <?php the_title(); ?>
         <?php echo '</a>'; ?>
       </h2>
-      <p><?php the_field( 'year' ); ?></p>
-      <p><?php the_field( 'subtitle' ); ?></p>
+      <?php if ( get_field( 'year' ) ): ?>
+        <p><?php the_field( 'year' ); ?></p>
+      <?php endif; ?>
+      <?php if ( get_field( 'one_sentence_description' ) ): ?>
+        <p><?php the_field( 'one_sentence_description' ); ?></p>
+      <?php endif; ?>
     </div>
 
     <?php
