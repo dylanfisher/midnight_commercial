@@ -15,7 +15,7 @@
   width: 100%;
   background-color: $black;
   padding-top: 11px;
-  height: $header-height;
+  height: $header-height-mobile;
   z-index: 10;
 
   a {
@@ -25,17 +25,26 @@
   .single-project & {
     background-color: $white;
   }
+
+  @include breakpoint(sm) {
+    height: $header-height;
+  }
 }
 
 .header-push {
-  height: $header-height;
-  margin-bottom: 180px;
+  height: $header-height-mobile;
+  margin-bottom: 90px;
+
+  @include breakpoint(sm) {
+    height: $header-height;
+    margin-bottom: 180px;
+  }
 }
 
 .nav {
   @include breakpoint(xs) {
     display: block;
-    margin-top: 5px;
+    margin-top: 2px;
 
     .menu-item {
       margin-right: 7px;

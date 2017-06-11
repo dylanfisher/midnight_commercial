@@ -1,0 +1,11 @@
+//
+// Two column text module
+//
+
+.two-column-text-module__col-left {
+  margin-bottom: 1em;
+
+  @include breakpoint(sm) {
+    margin-bottom: 0;
+  }
+}

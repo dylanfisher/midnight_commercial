@@ -6,9 +6,17 @@
   &:first-child {
     margin-top: 0;
   }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.module-type--text_modules,
+.module-type--text_module,
 .module-type--two_column_text_module {
-  margin-bottom: 150px;
+  margin-bottom: 4em;
+
+  @include breakpoint(sm) {
+    margin-bottom: 150px;
+  }
 }

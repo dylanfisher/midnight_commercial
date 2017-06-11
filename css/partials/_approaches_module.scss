@@ -3,9 +3,13 @@
 //
 
 .approaches {
-  margin: 150px auto 4em;
+  margin: 4em auto 0;
   text-align: center;
   max-width: 688px;
+
+  @include breakpoint(sm) {
+    margin-top: 150px;
+  }
 }
 
 .approach {
@@ -14,16 +18,24 @@
   &:before {
     content: '';
     width: 2px;
-    height: 150px;
+    height: 4em;
     background: $white;
     display: block;
     margin: 0.75em auto;
+
+    @include breakpoint(sm) {
+      height: 150px;
+    }
   }
 
   &:first-child {
     &:before {
       content: none;
     }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
