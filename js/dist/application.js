@@ -276,18 +276,22 @@ App.interlace = function(options) {
   var processShifts        = [];
   var shiftFactor          = 1;
   var toFromChaosDirection = 'to';
-  var mouseIdle            = 200;
+  var mouseIdle            = 100;
   var idleTime             = 0;
   var genSpot              = randomZeroMouseSpot();
   var $cloneWrapper;
   var $clones;
+  var $cloneItems;
+  var finishedMouseIntervention = false;
+  var stopAnimating = false;
+  var previousShiftMode;
 
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
-  var sliceRatio = 4.66;
+  var sliceRatio = 4.2;
 
   if ( $container.hasClass('interlace-large') ) {
-    sliceRatio = 10;
+    sliceRatio = 12;
   }
 
   // params
@@ -366,22 +370,77 @@ App.interlace = function(options) {
 
     $cloneWrapper = $container.find('.interlace-clone-wrapper');
     $clones = $cloneWrapper.find('.interlace-clone');
+    $cloneItems = $cloneWrapper.find('.interlace-clone__content');
 
     sliceDivs( startInterval );
   }
 
   function makeNewShiftVals() {
+    // Don't repeat shift modes
+    var shiftModes = ['random', 'asc', 'desc'];
+    var uniqueShiftModes = shiftModes;
+    var shiftMode = shiftModes[ Math.floor( Math.random() * shiftModes.length ) ];
+    var leftOrRightSeed = Math.random();
+
+    if ( shiftMode == previousShiftMode ) {
+      var index = shiftModes.indexOf( shiftMode );
+      if (index > -1) {
+        uniqueShiftModes.splice( index, 1 );
+      }
+      shiftMode = uniqueShiftModes[ Math.floor( Math.random() * uniqueShiftModes.length ) ];
+    }
+    previousShiftMode = shiftMode;
+    // var shiftMode = 'random';
+    console.log('shiftMode', shiftMode);
+
     shiftVals = [];
+
     for ( var i = 0; i < sliceNum; i++ ) {
+      shiftVals[i] = {};
+      var leftOrRight = getLeftOrRightVal(leftOrRightSeed, i);
       // setup the shift values
-      shiftVals[i] = {
-        px: getRandomInt(minShiftPx, maxShiftPx), // start position/shift for that slice
-        steps: getRandomInt(1, 5) // the more steps the longer the animation takes
-        // steps: 3
-      };
+      if ( shiftMode == 'random' ) {
+        shiftVals[i].px = maxShiftPx * leftOrRight;
+      } else if ( shiftMode == 'asc' ) {
+        shiftVals[i].px = Math.round( ( maxShiftPx / sliceNum ) * (i + 1) ) * leftOrRight;
+      } else if ( shiftMode == 'desc' ) {
+        shiftVals[i].px = ( maxShiftPx - Math.round( ( maxShiftPx / sliceNum ) * (i + 1) ) ) * leftOrRight;
+      }
+
+      shiftVals[i].steps = getRandomInt(1, 3); // the more steps the longer the animation takes
       processShiftsOrig[i] = shiftVals[i].px;
     }
-    // console.log('shiftVals', shiftVals);
+  }
+
+  function getLeftOrRightVal(seed, i) {
+    // getLeftOrRightVal determines which shift method to use for
+    // this animation.
+
+    var choices = 5;
+
+    if ( seed < 1 / choices ) {
+      // random
+      console.log('shift method', 'random');
+      leftOrRight = ( Math.random() < 0.5 ) ? -1 : 1;
+    } else if ( seed < 2 / choices ) {
+      // first right, then left
+      console.log('shift method', 'first right, then left');
+      leftOrRight = ( i <= sliceNum / 2 ) ? -1 : 1;
+    } else if ( seed < 3 / choices ) {
+      // first left, then right
+      console.log('shift method', 'first left, then right');
+      leftOrRight = ( i >= sliceNum / 2 ) ? -1 : 1;
+    } else if ( seed < 4 / choices ) {
+      // all in one direction
+      console.log('shift method', 'all in one direction');
+      leftOrRight = seed < 0.5 ? -1 : 1;
+    } else {
+      // alternating left, then right
+      console.log('shift method', 'alternating left, then right');
+      leftOrRight = ( i % 2 === 0 ) ? -1 : 1;
+    }
+
+    return leftOrRight;
   }
 
   function sliceDivs(startInt) {
@@ -392,8 +451,11 @@ App.interlace = function(options) {
   }
 
   function moveDivs() {
+    var moveDivCompletions = 0;
+
     if ( mode != 'mouse' ) {
       intIndex++;
+      $cloneItems.data('mouseInterventionComplete', false);
     }
 
     for ( var i = 0; i < sliceNum; i++ ) {
@@ -409,23 +471,8 @@ App.interlace = function(options) {
       case 'mouse':
         leftShift = shiftVals[i].px * shiftFactor;
         easing = 'easeInCirc';
-        animDuration = 10;
+        // animDuration = 0;
         break;
-      }
-
-      var uniqueShifts = processShifts.filter( onlyUnique );
-
-      if ( uniqueShifts.length == 1 && intIndex > 1 ) {
-        // shifts are all 0
-        if ( toFromChaosDirection == 'to' ) {
-          // go to other direction
-          startInterval( 'from' );
-        } else {
-          // restart
-          makeNewShiftVals();
-          startInterval( 'to' );
-        }
-
       }
 
       var css = {
@@ -434,11 +481,34 @@ App.interlace = function(options) {
       };
 
       if (mode == 'mouse') {
-        $item.css(css);
+        if ( $item.data('mouseInterventionComplete') ) {
+          $item.animate(css, animDuration / 1000, easing, mouseAnimationComplete( $item ));
+        } else {
+          $item.stop(true).animate(css, animDuration, easing, mouseAnimationComplete( $item ));
+        }
       } else {
         // delay random so every slice starts at a different time
+        $item.data('mouseInterventionComplete', false);
         $item.delay(getRandomInt(100, 800)).animate(css, animDuration, easing);
       }
+    }
+
+    var uniqueShifts = processShifts.filter( onlyUnique );
+
+    if ( uniqueShifts.length == 1 && intIndex > 1 ) {
+      // shifts are all 0
+      if ( toFromChaosDirection == 'to' ) {
+        // go to other direction
+        startInterval( 'from' );
+      } else {
+        // reset
+        makeNewShiftVals();
+        startInterval( 'to' );
+      }
+    }
+
+    function mouseAnimationComplete($item) {
+      $item.data('mouseInterventionComplete', true);
     }
   }
 
@@ -462,8 +532,8 @@ App.interlace = function(options) {
     var w = window.innerWidth;
     // var l = Math.floor( Math.random() * w * 0.5 );
     // var r = Math.floor( Math.random() * w * 0.5 );
-    var l = Math.floor( 0 );
-    var r = Math.floor( 1 );
+    var l = 0;
+    var r = 1;
     // console.log(0 + l, w - r);
     return [l, r];
   }
@@ -473,6 +543,7 @@ App.interlace = function(options) {
 
     if ( idleTime > 1 ) {
       mode = 'toFromChaos';
+      finishedMouseIntervention = false;
     }
 
     if ( idleTime > 1 && idleTime < 2 ) {
@@ -488,11 +559,33 @@ App.interlace = function(options) {
   }
 
   function listeners() {
-    var idleInterval = setInterval( timerIncrement, mouseIdle );
+    startAnimating(mouseIdle);
+
+    // https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
+    var fps, fpsInterval, startTime, now, then, elapsed;
+
+    function startAnimating(fps) {
+      fpsInterval = fps;
+      then = Date.now();
+      startTime = then;
+      animate();
+    }
+
+    function animate() {
+      if ( stopAnimating ) return;
+      requestAnimationFrame( animate );
+      now = Date.now();
+      elapsed = now - then;
+      if (elapsed > fpsInterval) {
+        // console.log('animation frame');
+        then = now - (elapsed % fpsInterval);
+        timerIncrement();
+      }
+    }
 
     $(window).mousemove(function(e) {
       // Stop all running animations when mouse movement starts
-      $clones.find('.interlace-clone__content').finish();
+      // $clones.find('.interlace-clone__content').finish();
       idleTime = 0;
       mode = 'mouse';
       moveDivs();
