@@ -471,7 +471,6 @@ App.interlace = function(options) {
       case 'mouse':
         leftShift = shiftVals[i].px * shiftFactor;
         easing = 'easeInCirc';
-        // animDuration = 0;
         break;
       }
 
@@ -482,7 +481,7 @@ App.interlace = function(options) {
 
       if (mode == 'mouse') {
         if ( $item.data('mouseInterventionComplete') ) {
-          $item.animate(css, animDuration / 1000, easing, mouseAnimationComplete( $item ));
+          $item.animate(css, 1, easing, mouseAnimationComplete( $item ));
         } else {
           $item.stop(true).animate(css, animDuration, easing, mouseAnimationComplete( $item ));
         }
