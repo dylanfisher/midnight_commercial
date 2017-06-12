@@ -9,7 +9,7 @@ App.interlace = function(options) {
   var processShifts        = [];
   var shiftFactor          = 1;
   var toFromChaosDirection = 'to';
-  var mouseIdle            = 100;
+  var mouseIdle            = 200;
   var idleTime             = 0;
   var genSpot              = randomZeroMouseSpot();
   var $cloneWrapper;
