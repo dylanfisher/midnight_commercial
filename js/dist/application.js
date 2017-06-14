@@ -288,7 +288,9 @@ App.interlace = function(options) {
 
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
-  var sliceRatio = 4.2;
+  // var sliceRatio = 4.2;
+  var sliceRatio = App.windowWidth / 18 / 10;
+  console.log('sliceRatio', sliceRatio);
 
   if ( $container.hasClass('interlace-large') ) {
     sliceRatio = 12;
