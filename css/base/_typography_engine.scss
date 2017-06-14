@@ -11,5 +11,9 @@ $sans-serif: 'calibre_regular', sans-serif;
   @include breakpoint(sm) {
     font-size: 32px;
   }
+
+  @include breakpoint(xl) {
+    font-size: 36px;
+  }
 }
 .font-regular { @include font--regular; }

@@ -15,6 +15,10 @@
     @media (min-width: $breakpoint-lg) { @content; }
   }
 
+  @else if $size == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+
   @else if type-of($size) == number {
     @media (min-width: $size) { @content; }
   }
