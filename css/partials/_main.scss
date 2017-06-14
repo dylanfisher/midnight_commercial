@@ -18,3 +18,13 @@ body {
 .entry-title {
   margin-bottom: 1em;
 }
+
+.entry-content {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include breakpoint(xl) {
+    max-width: 1020px;
+  }
+}
