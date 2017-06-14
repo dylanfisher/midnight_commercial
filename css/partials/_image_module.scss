@@ -2,6 +2,12 @@
 // Image module
 //
 
+.module-type--image_module {
+  img {
+    width: 100%;
+  }
+}
+
 .image-caption {
   margin-top: $space-tiny;
 }
