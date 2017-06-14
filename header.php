@@ -42,9 +42,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
-            <h1 class="site-title">
-              <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
-            </h1>
+            <div class="site-title">
+              <div class="offon-slice" data-offset="0" data-maxshift="15" data-slices="16" easing="easeInSine" data-minduration="20" data-maxduration="60">
+                <div class="sl-container">
+                  <a class="sl-content" href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
+                </div>
+              </div>
+            </div>
             <nav class="nav">
               <?php wp_nav_menu(); ?>
             </nav>

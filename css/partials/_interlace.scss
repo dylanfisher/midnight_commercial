@@ -32,3 +32,26 @@
 .interlace-clone__content {
   position: relative;
 }
+
+// 'template' files from Hang
+.onoff-slice, .offon-slice {
+  cursor: pointer;
+}
+
+.sl-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.sl-content {
+  /* depending on parent */
+  width: 100%;
+  /* important for p shift and height */
+  line-height: 1em;
+  font-weight: 100;
+  font-size: 32px;
+  margin: 0;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
