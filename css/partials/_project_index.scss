@@ -15,7 +15,11 @@
 }
 
 .project-collage__title-area {
-  padding-bottom: 40px;
+  padding-bottom: 80px;
+
+  @include breakpoint(sm) {
+    padding-bottom: 40px;
+  }
 }
 
 .project-collage__media {

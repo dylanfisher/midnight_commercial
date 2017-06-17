@@ -631,6 +631,10 @@ $(function() {
 Interlace = {};
 
 Interlace.initialize = function(options) {
+    if ( App.breakpoint.isMobile() ) {
+      return;
+    }
+
     options = options || {};
 
     var selector = options.selector;

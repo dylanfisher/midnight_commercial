@@ -1,7 +1,7 @@
-<?php $title_position = get_field( 'title_position' ) == 'left' ? '' : 'col-xs-offset-4 col-md-offset-6' ?>
+<?php $title_position = get_field( 'title_position' ) == 'left' ? '' : 'col-xs-offset-0 col-md-offset-6' ?>
 <div class="project-collage">
   <div class="row">
-    <div class="project-collage__title-area project-collage__title-area--<?php the_field( 'title_position' ); ?> col-xs-8 col-md-4 <?php echo $title_position; ?>">
+    <div class="project-collage__title-area project-collage__title-area--<?php the_field( 'title_position' ); ?> col-xs-12 col-md-4 <?php echo $title_position; ?>">
       <a href="<?php the_permalink(); ?>" class="collage-link">
         <h2><?php the_title(); ?></h2>
         <?php if ( get_field( 'year' ) ): ?>
