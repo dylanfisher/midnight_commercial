@@ -22,14 +22,10 @@
   &:before {
     content: '';
     width: 2px;
-    height: 4em;
+    height: 10em;
     background: $white;
     display: block;
     margin: 0.75em auto;
-
-    @include breakpoint(sm) {
-      height: 150px;
-    }
   }
 
   &:first-child {
@@ -61,5 +57,6 @@
 }
 
 .approach__title {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }

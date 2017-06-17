@@ -154,7 +154,8 @@ $(function() {
         '.entry-content a',
         '.sl-container',
         '.project-collage-column img',
-        '.module a'
+        '.module a',
+        '.collage-link'
     ];
 
     Interlace.initialize({
