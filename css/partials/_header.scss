@@ -117,12 +117,22 @@
   display: none;
 }
 
-.mobile-nav-active {
+.mobile-nav-activating {
   .hamburger {
     display: none;
   }
 
   .mobile-nav-close {
     display: block;
+  }
+}
+
+.mobile-nav-deactivating {
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-nav-close {
+    display: none;
   }
 }
