@@ -75,3 +75,54 @@
     border-bottom: 1px solid;
   }
 }
+
+@include breakpoint(xs) {
+  .nav {
+    display: none;
+    background-color: $black;
+
+    .menu-item {
+      display: block;
+      margin: 1em 0;
+    }
+  }
+
+  .menu-main-menu-container {
+    margin-bottom: 1em;
+    border-bottom: 1px solid $white;
+  }
+
+  .mobile-nav-active {
+    .nav {
+      display: block;
+    }
+  }
+}
+
+.hamburger,
+.mobile-nav-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 9px 20px;
+  z-index: 1;
+  cursor: pointer;
+
+  @include breakpoint(sm) {
+    display: none;
+  }
+}
+
+.mobile-nav-close {
+  display: none;
+}
+
+.mobile-nav-active {
+  .hamburger {
+    display: none;
+  }
+
+  .mobile-nav-close {
+    display: block;
+  }
+}

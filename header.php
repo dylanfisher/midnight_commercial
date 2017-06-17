@@ -51,6 +51,12 @@
           </div>
         </div>
       </div>
+      <div class="hamburger">
+        <?php get_template_part( 'images/svg/hamburger.svg' ); ?>
+      </div>
+      <div class="mobile-nav-close">
+        <?php get_template_part( 'images/svg/nav_close.svg' ); ?>
+      </div>
     </header>
     <div class="header-push"></div>
     <div class="container-fluid">

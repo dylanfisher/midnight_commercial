@@ -15,8 +15,10 @@ a {
 @mixin blank-link-hover {
   @include blank-link;
 
-  &:hover {
-    border-bottom: 1px solid;
+  @include breakpoint(sm) {
+    &:hover {
+      border-bottom: 1px solid;
+    }
   }
 }
 .blank-link-hover { @include blank-link-hover; }
