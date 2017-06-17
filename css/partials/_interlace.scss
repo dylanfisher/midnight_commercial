@@ -1,7 +1,8 @@
 //
-// Interlace
+// Interlace and slice
 //
 
+// Interlace
 .interlace {
   position: relative;
 }
@@ -12,16 +13,17 @@
 
   &.active {
     color: transparent;
-    opacity: 0;
   }
 }
 
-.interlace-clone-wrapper {
+.interlace-clone-wrapper,
+.slice-clone-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   pointer-events: none;
+  user-select: none;
 }
 
 .interlace-clone {
@@ -29,29 +31,39 @@
   overflow: hidden;
 }
 
-.interlace-clone__content {
+.interlace-clone__content,
+.slice-clone__content {
   position: relative;
 }
 
-// 'template' files from Hang
-.onoff-slice, .offon-slice {
-  cursor: pointer;
+// Slice
+.slice-wrapper,
+.slice-original-item {
+  display: inline-block;
 }
 
-.sl-container {
+.slice-original-item {
   position: relative;
+}
+
+.slice-wrapper {
+  position: relative;
+
+  &.active {
+    .slice-original-item {
+      color: transparent;
+    }
+  }
+}
+
+.slice-wrapper--has-image {
+  &.active {
+    .slice-original-item {
+      opacity: 0;
+    }
+  }
+}
+
+.slice-clone {
   overflow: hidden;
-}
-
-.sl-content {
-  /* depending on parent */
-  width: 100%;
-  /* important for p shift and height */
-  line-height: 1em;
-  font-weight: 100;
-  font-size: 32px;
-  margin: 0;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
 }

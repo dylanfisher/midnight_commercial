@@ -7,16 +7,6 @@
   display: inline-block;
 }
 
-.site-title {
-  height: 32px;
-  overflow: hidden;
-  max-width: 290px;
-
-  .interlace-initialized {
-    margin-left: -15px;
-  }
-}
-
 .header {
   position: fixed;
   top: 0;
