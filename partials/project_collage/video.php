@@ -1,3 +1,3 @@
-<video src="<?php the_sub_field( 'video' ) ?>" autoplay muted loop>
-  Sorry, your browser doesn't support the video tag.
-</video>
+<div class="project-collage__video responsive-embed-wrapper">
+  <?php the_sub_field( 'video' ); ?>
+</div>

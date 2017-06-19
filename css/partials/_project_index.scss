@@ -3,6 +3,7 @@
 //
 
 .project-collage {
+  position: relative;
   margin-bottom: 100px;
 
   @include breakpoint(sm) {
@@ -12,6 +13,10 @@
   @include breakpoint(lg) {
     margin-bottom: 320px;
   }
+}
+
+.project-collage-column {
+  position: absolute;
 }
 
 .project-collage__title-area {
@@ -24,8 +29,10 @@
 
 .project-collage__media {
   width: 80%;
+  height: 40vw;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .collage-link {
