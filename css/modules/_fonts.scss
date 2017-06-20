@@ -7,3 +7,12 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'calibre_regular';
+  src: url('fonts/CalibreWeb-RegularItalic.eot');
+  src: url('fonts/CalibreWeb-RegularItalic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/CalibreWeb-RegularItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}

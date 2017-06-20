@@ -22,3 +22,9 @@ a {
   }
 }
 .blank-link-hover { @include blank-link-hover; }
+
+@mixin default-link {
+  @include blank-link;
+  font-style: italic;
+}
+.default-link { @include default-link; }

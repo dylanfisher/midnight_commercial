@@ -19,10 +19,15 @@
 
   a {
     @include blank-link;
+    color: $white;
   }
 
   .single-project & {
     background-color: $white;
+
+    a {
+      color: $black;
+    }
   }
 
   @include breakpoint(sm) {
@@ -74,6 +79,10 @@
     display: none;
     background-color: $black;
 
+    .single-project & {
+      background-color: $white;
+    }
+
     .menu-item {
       display: block;
       margin: 1em 0;
@@ -100,6 +109,13 @@
   padding: 9px 20px;
   z-index: 1;
   cursor: pointer;
+
+  .single-project & {
+    #hamburger_Mobile-01a-home,
+    #nav_close_Menu-state-01-Copy-4 {
+      fill: $black;
+    }
+  }
 
   @include breakpoint(sm) {
     display: none;

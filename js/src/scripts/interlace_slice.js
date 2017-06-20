@@ -170,7 +170,6 @@ $(function() {
         'header a',
         '.blank-link-hover',
         '.entry-content a',
-        '.sl-container',
         '.project-collage-column img',
         '.module a',
         '.collage-link'

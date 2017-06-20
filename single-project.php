@@ -3,9 +3,7 @@
   <div class="ta-c">
     <div class="project__featured-image">
       <div class="offon-slice" data-offset="0" data-maxshift="15" data-slices="200" easing="easeInSine" data-minduration="20" data-maxduration="60">
-        <div class="sl-container">
-          <?php sandbox_image( 'featured_image', 'large', 'sl-content' ); ?>
-        </div>
+        <?php sandbox_image( 'featured_image', 'large', 'sl-content' ); ?>
       </div>
     </div>
   </div>
