@@ -223,7 +223,7 @@ App.interlace = function(options) {
       } else {
         // delay random so every slice starts at a different time
         $item.data('mouseInterventionComplete', false);
-        $item.delay(getRandomInt(100, 800)).animate(css, animDuration, easing);
+        $item.delay(getRandomInt(100, 800)).velocity(css, animDuration, easing);
       }
     }
 

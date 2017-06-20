@@ -18,7 +18,7 @@
   z-index: 10;
 
   a {
-    @include blank-link-hover;
+    @include blank-link;
   }
 
   .single-project & {
@@ -66,13 +66,6 @@
         margin-left: 0;
       }
     }
-  }
-}
-
-.current-menu-item,
-.current_page_item {
-  a {
-    border-bottom: 1px solid;
   }
 }
 

@@ -1,22 +1,33 @@
 Interlace = {};
 
 Interlace.initialize = function(options) {
-    if ( App.breakpoint.isMobile() ) {
-      return;
-    }
+    // if ( App.breakpoint.isMobile() ) {
+    //   return;
+    // }
 
     options = options || {};
 
     var selector = options.selector;
 
+    // Parameters
+    var minDur = 30;
+    var maxDur = 120;
+
     createDivs(selector);
 
     $(document).on('mouseenter', selector, function(e) {
-        moveDivs(e.target, selector, 'to');
+        if ( $(this).hasClass('static-interlace-item') ) return;
+        moveDivs(e.target, 'to');
     });
 
     $(document).on('mouseleave', selector, function(e) {
-        moveDivs(e.target, selector, 'from');
+        if ( $(this).hasClass('static-interlace-item') ) return;
+        moveDivs(e.target, 'from');
+    });
+
+    $('.current-menu-item a, .current_page_item a').on('mc:initialized', function() {
+        $(this).trigger('mouseenter');
+        $(this).addClass('static-interlace-item');
     });
 
     // Helper functions
@@ -62,12 +73,18 @@ Interlace.initialize = function(options) {
         var allSlicedTyped = $(className);
         allSlicedTyped.each(function() {
             var $this = $(this);
-            $this.imagesLoaded(function() {
-                var hasImg = ( $this.find('img').length || $this.is('img') ) ? true : false;
+            var hasImg = ( $this.find('img').length || $this.is('img') ) ? true : false;
+            if ( hasImg ) {
+                doCreateDivs();
+            } else {
+                $this.imagesLoaded(function() {
+                    doCreateDivs();
+                });
+            }
+
+            function doCreateDivs() {
                 var yOffset = 0;
                 var xShift = hasImg ? 50 : 15;
-                var minDur = 20;
-                var maxDur = 60;
                 var fontSize = parseInt($this.css('font-size'));
                 var containerwidth = $this.width();
                 var containerheight = $this.height();
@@ -111,42 +128,39 @@ Interlace.initialize = function(options) {
                 }
 
                 $sliceWrapper.addClass('active');
-            });
+
+                $this.trigger('mc:initialized');
+            }
         });
     }
 
-    function moveIndiv(frame, el, fromTo) {
-        var duration = parseInt(el.data('data-duration')) || 0,
-            shift = parseInt(el.data('data-shift')) || 0,
-            left = fromTo === 'from' ? fromChaos(frame, shift) : toChaos(frame, shift);
+    var frame = 0;
 
-        el.find('.slice-clone__content').stop(true).animate({
+    function moveIndiv(el, fromTo) {
+        var duration = parseInt(el.data('data-duration')) || 0;
+        var shift = parseInt(el.data('data-shift')) || 0;
+        var left = fromTo === 'from' ? 0 : toChaos(frame, shift);
+
+        el.find('.slice-clone__content').stop(true).velocity({
             left: left
         }, duration, 'easeInSine');
-
-        if ((left !== 0 && fromTo === 'from') ||
-            (left !== shift && fromTo === 'to')) {
-            requestAnimationFrame(function() {
-                moveIndiv(frame, el, fromTo);
-            });
-        }
 
         frame++;
     }
 
-    function moveDivs(target, className, mode) {
+    function moveDivs(target, mode) {
         var $sliceWrapper = $(target).closest('.slice-wrapper');
         var $clones = $sliceWrapper.find('.slice-clone');
+        var maxShiftPx = $sliceWrapper.find('img').length > 0 ? 50 : 15;
 
         $clones.each(function() {
             var $cloneItem = $(this);
-            if (mode === 'to') {
+            if ( mode === 'to' ) {
                 // shuffle left position / starting shift
-                var maxShiftPx = $cloneItem.find('img').length > 0 ? 50 : 15;
                 var newStartShift = getRandomInt(-maxShiftPx, maxShiftPx);
                 $cloneItem.data('data-shift', newStartShift);
             }
-            moveIndiv(0, $cloneItem, mode);
+            moveIndiv($cloneItem, mode);
         });
     }
 };
