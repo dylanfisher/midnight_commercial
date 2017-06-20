@@ -1,30 +1,47 @@
 <?php $collage_data = json_decode ( get_field( 'collage' ) ); ?>
 
-<?php $title_position = 'col-xs-offset-0 col-md-offset-0' ?>
+<?php ob_start(); ?>
+  <a href="<?php the_permalink(); ?>" class="collage-link">
+    <h2><?php the_title(); ?></h2>
+    <?php if ( get_field( 'year' ) ): ?>
+      <p>
+        <?php the_field( 'year' ); ?>
+      </p>
+    <?php endif; ?>
+    <?php if ( get_field( 'one_sentence_description' ) ): ?>
+      <p>
+        <?php the_field( 'one_sentence_description' ); ?>
+      </p>
+    <?php endif; ?>
+  </a>
+<?php $collage_description = ob_get_clean(); ?>
 
 <div class="project-collage">
   <div class="row">
-    <div class="project-collage__title-area col-xs-12 col-md-4 <?php echo $title_position; ?>">
-      <a href="<?php the_permalink(); ?>" class="collage-link">
-        <h2><?php the_title(); ?></h2>
-        <?php if ( get_field( 'year' ) ): ?>
-          <p>
-            <?php the_field( 'year' ); ?>
-          </p>
-        <?php endif; ?>
-        <?php if ( get_field( 'one_sentence_description' ) ): ?>
-          <p>
-            <?php the_field( 'one_sentence_description' ); ?>
-          </p>
-        <?php endif; ?>
-      </a>
+    <div class="project-collage__title-area project-collage__title-area--mobile col-xs-12">
+      <?php echo $collage_description; ?>
     </div>
-
     <div class="project-collage__media">
       <?php
+        // var_dump($collage_data);
+        $index = 0;
+        $collage_data_for_item = $collage_data->$index;
+
+        $columns = $collage_data_for_item->columns;
+        $column_offset = $collage_data_for_item->columnOffset;
+        $vertical_offset = $collage_data_for_item->positionTop;
+        $z_index = $collage_data_for_item->zIndex;
+      ?>
+
+      <?php echo '<div class="project-collage__title-area project-collage__title-area--desktop project-collage-column col-xs-12 col-sm-' . $columns  . ' col-sm-offset-' . $column_offset . '" style="top: ' . $vertical_offset . '%; z-index: ' . $z_index . ';">'; ?>
+        <?php echo $collage_description; ?>
+      <?php echo '</div>'; ?>
+
+      <?php
         if ( have_rows( 'collage_items' ) ):
-          $index = -1;
-          while ( have_rows( 'collage_items' ) ): the_row(); $index++;
+          // Intentionally start the index at 1 because we add the custom description row first
+          $index = 1;
+          while ( have_rows( 'collage_items' ) ): the_row();
             $collage_data_for_item = $collage_data->$index;
 
             $columns = $collage_data_for_item->columns;
@@ -37,6 +54,7 @@
                 sandbox_get_template_part( 'partials/project_collage/' . get_row_layout(), array( 'columns' => $columns ) );
               echo '</a>';
             echo '</div>';
+            $index++;
           endwhile;
         endif;
       ?>

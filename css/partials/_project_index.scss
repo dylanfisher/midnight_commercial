@@ -5,6 +5,9 @@
 .project-collage {
   position: relative;
   margin-bottom: 100px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 
   @include breakpoint(sm) {
     margin-bottom: 240px;
@@ -17,21 +20,33 @@
 
 .project-collage-column {
   position: absolute;
+  left: 0;
 }
 
 .project-collage__title-area {
-  padding-bottom: 80px;
+  padding-bottom: 0px;
 
-  @include breakpoint(sm) {
+  @include breakpoint(md) {
     padding-bottom: 40px;
   }
 }
 
+.project-collage__title-area--desktop {
+  display: none;
+  @include breakpoint(md) {
+    display: block;
+  }
+}
+
+.project-collage__title-area--mobile {
+  @include breakpoint(md) {
+    display: none;
+  }
+}
+
 .project-collage__media {
-  width: 80%;
-  height: 40vw;
-  margin-left: auto;
-  margin-right: auto;
+  // height is a magic number that needs to match the height set in the acf-collage plugin
+  height: 60vw;
   position: relative;
 }
 
