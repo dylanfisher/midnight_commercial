@@ -19,14 +19,19 @@
 
   a {
     @include blank-link;
-    color: $white;
+
+    @include breakpoint(xs) {
+      color: $white;
+    }
   }
 
   .single-project & {
     background-color: $white;
 
     a {
-      color: $black;
+      @include breakpoint(xs) {
+        color: $black;
+      }
     }
   }
 
