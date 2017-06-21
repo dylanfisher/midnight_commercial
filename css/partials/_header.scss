@@ -97,6 +97,10 @@
   .menu-main-menu-container {
     margin-bottom: 1em;
     border-bottom: 1px solid $white;
+
+    .single-project & {
+      border-bottom-color: $black;
+    }
   }
 
   .mobile-nav-active {

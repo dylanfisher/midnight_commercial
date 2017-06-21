@@ -709,10 +709,14 @@ Interlace.initialize = function(options) {
             var $this = $(this);
             var hasImg = ( $this.find('img').length || $this.is('img') ) ? true : false;
             if ( hasImg ) {
-                doCreateDivs();
-            } else {
                 $this.imagesLoaded(function() {
                     doCreateDivs();
+                    $this.trigger('mc:initialized');
+                });
+            } else {
+                doCreateDivs();
+                setTimeout(function() {
+                    $this.trigger('mc:initialized');
                 });
             }
 
@@ -762,8 +766,6 @@ Interlace.initialize = function(options) {
                 }
 
                 $sliceWrapper.addClass('active');
-
-                $this.trigger('mc:initialized');
             }
         });
     }
