@@ -22,8 +22,8 @@ App.interlace = function(options) {
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
   // var sliceRatio = 4.2;
-  var sliceRatio = App.windowWidth / 18 / 10;
-  console.log('sliceRatio', sliceRatio);
+  var sliceRatio = App.windowWidth / 16 / 10;
+  // console.log('sliceRatio', sliceRatio);
 
   if ( $container.hasClass('interlace-large') ) {
     sliceRatio = 12;
@@ -37,9 +37,9 @@ App.interlace = function(options) {
   var originalHeight = $original.outerHeight( true ); // height of the type container
   var sliceNum       = Math.round( originalHeight / sliceRatio ); // number of slices
   var sliceHeight    = Math.ceil( fontHeight / sliceNum ); // round up to have whole px, FIX flicker
-  var intervalTime   = 1200; // time for each shift
+  var intervalTime   = 1000; // time for each shift
 
-  var maxShift       = 40; // percentage to calculate shift in px
+  var maxShift       = 20; // percentage to calculate shift in px
   var minShift       = -maxShift; // percentage to calculate shift in px
   var minShiftPx     = fontSize * minShift / 100; // calculate shift in px based on font size
   var maxShiftPx     = fontSize * maxShift / 100; // calculate shift in px based on font size
@@ -125,8 +125,9 @@ App.interlace = function(options) {
       shiftMode = uniqueShiftModes[ Math.floor( Math.random() * uniqueShiftModes.length ) ];
     }
     previousShiftMode = shiftMode;
-    // var shiftMode = 'random';
-    console.log('shiftMode', shiftMode);
+
+    // Override shiftMode and set to always random for now.
+    shiftMode = 'random';
 
     shiftVals = [];
 
@@ -142,7 +143,7 @@ App.interlace = function(options) {
         shiftVals[i].px = ( maxShiftPx - Math.round( ( maxShiftPx / sliceNum ) * (i + 1) ) ) * leftOrRight;
       }
 
-      shiftVals[i].steps = getRandomInt(1, 3); // the more steps the longer the animation takes
+      shiftVals[i].steps = getRandomInt(1, 4); // the more steps the longer the animation takes
       processShiftsOrig[i] = shiftVals[i].px;
     }
   }
@@ -151,27 +152,19 @@ App.interlace = function(options) {
     // getLeftOrRightVal determines which shift method to use for
     // this animation.
 
-    var choices = 5;
+    var choices = 3;
 
     if ( seed < 1 / choices ) {
       // random
-      console.log('shift method', 'random');
+      // console.log('shift method', 'random');
       leftOrRight = ( Math.random() < 0.5 ) ? -1 : 1;
     } else if ( seed < 2 / choices ) {
-      // first right, then left
-      console.log('shift method', 'first right, then left');
-      leftOrRight = ( i <= sliceNum / 2 ) ? -1 : 1;
-    } else if ( seed < 3 / choices ) {
-      // first left, then right
-      console.log('shift method', 'first left, then right');
-      leftOrRight = ( i >= sliceNum / 2 ) ? -1 : 1;
-    } else if ( seed < 4 / choices ) {
       // all in one direction
-      console.log('shift method', 'all in one direction');
+      // console.log('shift method', 'all in one direction');
       leftOrRight = seed < 0.5 ? -1 : 1;
     } else {
       // alternating left, then right
-      console.log('shift method', 'alternating left, then right');
+      // console.log('shift method', 'alternating left, then right');
       leftOrRight = ( i % 2 === 0 ) ? -1 : 1;
     }
 
@@ -317,27 +310,27 @@ App.interlace = function(options) {
       }
     }
 
-    $(window).mousemove(function(e) {
-      // Stop all running animations when mouse movement starts
-      // $clones.find('.interlace-clone__content').finish();
-      idleTime = 0;
-      mode = 'mouse';
-      moveDivs();
-      var w = window.innerWidth;
-      // mapping 0,window.innerWidth to -1, 1
-      // so 0 is the center of the page
-      // that's when there will be no shift in the slices
-      // shiftFactor = e.clientX.map(0, w, -1, 1);
-      // modify so that 0 sweet spot is somewhere else
-      var mouseMapped = e.clientX.map(0 + genSpot[0], w - genSpot[1], -1, 1);
-      if (mouseMapped < -1.5) {
-        shiftFactor = -1.5;
-      } else if (mouseMapped > 1.5) {
-        shiftFactor = 1.5;
-      } else {
-        shiftFactor = mouseMapped;
-      }
-    });
+    // $(window).mousemove(function(e) {
+    //   // Stop all running animations when mouse movement starts
+    //   // $clones.find('.interlace-clone__content').finish();
+    //   idleTime = 0;
+    //   mode = 'mouse';
+    //   moveDivs();
+    //   var w = window.innerWidth;
+    //   // mapping 0,window.innerWidth to -1, 1
+    //   // so 0 is the center of the page
+    //   // that's when there will be no shift in the slices
+    //   // shiftFactor = e.clientX.map(0, w, -1, 1);
+    //   // modify so that 0 sweet spot is somewhere else
+    //   var mouseMapped = e.clientX.map(0 + genSpot[0], w - genSpot[1], -1, 1);
+    //   if (mouseMapped < -1.5) {
+    //     shiftFactor = -1.5;
+    //   } else if (mouseMapped > 1.5) {
+    //     shiftFactor = 1.5;
+    //   } else {
+    //     shiftFactor = mouseMapped;
+    //   }
+    // });
   }
 
   listeners();

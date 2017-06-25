@@ -2,17 +2,45 @@
 // Home
 //
 
-.interlaced-logo-wrapper {
-  text-align: center;
-  font-size: 18vw;
+.home-page-splash-area {
+  height: 100vh;
+  margin-bottom: 180px - $header-height;;
+}
+
+.home-page-tagline-logo-area {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+}
+
+.interlaced-logo-wrapper {
+  text-align: center;
+  font-size: 18vw;
+  width: 100%;
   line-height: 1;
 
   @include breakpoint(sm) {
-    font-size: 8.5vw;
+    font-size: 10vw;
   }
+}
+
+.home-page-tagline {
+  max-width: 520px;
+  margin: 1em auto 0;
+  text-align: center;
+}
+
+.home-page-see-more {
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.work-anchor-link {
+  padding-top: $header-height;
 }

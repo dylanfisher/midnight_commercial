@@ -172,9 +172,8 @@ $(function() {
         'header a',
         '.blank-link-hover',
         '.entry-content a',
-        '.project-collage-column img',
         '.module a',
-        '.collage-link'
+        '.collage-link h2'
     ];
 
     Interlace.initialize({

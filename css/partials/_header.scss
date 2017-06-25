@@ -16,6 +16,7 @@
   padding-top: 11px;
   height: $header-height-mobile;
   z-index: $site-high-z-index;
+  transition: opacity 0.4s;
 
   a {
     @include blank-link;
@@ -47,6 +48,20 @@
   @include breakpoint(sm) {
     height: $header-height;
     margin-bottom: 180px;
+  }
+}
+
+.home {
+  .header {
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .header-push {
+    display: none;
   }
 }
 

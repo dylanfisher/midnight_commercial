@@ -276,6 +276,34 @@ App.breakpoint.isMobile = function() {
   return ( App.breakpoint('xs') || App.breakpoint('sm') );
 };
 
+$(function() {
+  var $homeSplashArea = $('.home-page-splash-area');
+  var $header = $('.header');
+
+  if ( $homeSplashArea.length ) {
+    var splashHeight = $homeSplashArea.height();
+
+    $(window).resize(function() {
+      splashHeight = $homeSplashArea.height();
+    });
+
+    $(window).scroll(function() {
+      if ( App.scrollTop > splashHeight ) {
+        $header.addClass('active');
+      } else {
+        $header.removeClass('active');
+      }
+    });
+  }
+
+});
+
+$(document).on('click', '.home-page-see-more', function() {
+  var $workArea = $('#work');
+
+  App.scrollTo($workArea);
+});
+
 App.interlace = function(options) {
   options = options || {};
 
@@ -300,8 +328,8 @@ App.interlace = function(options) {
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
   // var sliceRatio = 4.2;
-  var sliceRatio = App.windowWidth / 18 / 10;
-  console.log('sliceRatio', sliceRatio);
+  var sliceRatio = App.windowWidth / 16 / 10;
+  // console.log('sliceRatio', sliceRatio);
 
   if ( $container.hasClass('interlace-large') ) {
     sliceRatio = 12;
@@ -315,9 +343,9 @@ App.interlace = function(options) {
   var originalHeight = $original.outerHeight( true ); // height of the type container
   var sliceNum       = Math.round( originalHeight / sliceRatio ); // number of slices
   var sliceHeight    = Math.ceil( fontHeight / sliceNum ); // round up to have whole px, FIX flicker
-  var intervalTime   = 1200; // time for each shift
+  var intervalTime   = 1000; // time for each shift
 
-  var maxShift       = 40; // percentage to calculate shift in px
+  var maxShift       = 20; // percentage to calculate shift in px
   var minShift       = -maxShift; // percentage to calculate shift in px
   var minShiftPx     = fontSize * minShift / 100; // calculate shift in px based on font size
   var maxShiftPx     = fontSize * maxShift / 100; // calculate shift in px based on font size
@@ -403,8 +431,9 @@ App.interlace = function(options) {
       shiftMode = uniqueShiftModes[ Math.floor( Math.random() * uniqueShiftModes.length ) ];
     }
     previousShiftMode = shiftMode;
-    // var shiftMode = 'random';
-    console.log('shiftMode', shiftMode);
+
+    // Override shiftMode and set to always random for now.
+    shiftMode = 'random';
 
     shiftVals = [];
 
@@ -420,7 +449,7 @@ App.interlace = function(options) {
         shiftVals[i].px = ( maxShiftPx - Math.round( ( maxShiftPx / sliceNum ) * (i + 1) ) ) * leftOrRight;
       }
 
-      shiftVals[i].steps = getRandomInt(1, 3); // the more steps the longer the animation takes
+      shiftVals[i].steps = getRandomInt(1, 4); // the more steps the longer the animation takes
       processShiftsOrig[i] = shiftVals[i].px;
     }
   }
@@ -429,27 +458,19 @@ App.interlace = function(options) {
     // getLeftOrRightVal determines which shift method to use for
     // this animation.
 
-    var choices = 5;
+    var choices = 3;
 
     if ( seed < 1 / choices ) {
       // random
-      console.log('shift method', 'random');
+      // console.log('shift method', 'random');
       leftOrRight = ( Math.random() < 0.5 ) ? -1 : 1;
     } else if ( seed < 2 / choices ) {
-      // first right, then left
-      console.log('shift method', 'first right, then left');
-      leftOrRight = ( i <= sliceNum / 2 ) ? -1 : 1;
-    } else if ( seed < 3 / choices ) {
-      // first left, then right
-      console.log('shift method', 'first left, then right');
-      leftOrRight = ( i >= sliceNum / 2 ) ? -1 : 1;
-    } else if ( seed < 4 / choices ) {
       // all in one direction
-      console.log('shift method', 'all in one direction');
+      // console.log('shift method', 'all in one direction');
       leftOrRight = seed < 0.5 ? -1 : 1;
     } else {
       // alternating left, then right
-      console.log('shift method', 'alternating left, then right');
+      // console.log('shift method', 'alternating left, then right');
       leftOrRight = ( i % 2 === 0 ) ? -1 : 1;
     }
 
@@ -595,27 +616,27 @@ App.interlace = function(options) {
       }
     }
 
-    $(window).mousemove(function(e) {
-      // Stop all running animations when mouse movement starts
-      // $clones.find('.interlace-clone__content').finish();
-      idleTime = 0;
-      mode = 'mouse';
-      moveDivs();
-      var w = window.innerWidth;
-      // mapping 0,window.innerWidth to -1, 1
-      // so 0 is the center of the page
-      // that's when there will be no shift in the slices
-      // shiftFactor = e.clientX.map(0, w, -1, 1);
-      // modify so that 0 sweet spot is somewhere else
-      var mouseMapped = e.clientX.map(0 + genSpot[0], w - genSpot[1], -1, 1);
-      if (mouseMapped < -1.5) {
-        shiftFactor = -1.5;
-      } else if (mouseMapped > 1.5) {
-        shiftFactor = 1.5;
-      } else {
-        shiftFactor = mouseMapped;
-      }
-    });
+    // $(window).mousemove(function(e) {
+    //   // Stop all running animations when mouse movement starts
+    //   // $clones.find('.interlace-clone__content').finish();
+    //   idleTime = 0;
+    //   mode = 'mouse';
+    //   moveDivs();
+    //   var w = window.innerWidth;
+    //   // mapping 0,window.innerWidth to -1, 1
+    //   // so 0 is the center of the page
+    //   // that's when there will be no shift in the slices
+    //   // shiftFactor = e.clientX.map(0, w, -1, 1);
+    //   // modify so that 0 sweet spot is somewhere else
+    //   var mouseMapped = e.clientX.map(0 + genSpot[0], w - genSpot[1], -1, 1);
+    //   if (mouseMapped < -1.5) {
+    //     shiftFactor = -1.5;
+    //   } else if (mouseMapped > 1.5) {
+    //     shiftFactor = 1.5;
+    //   } else {
+    //     shiftFactor = mouseMapped;
+    //   }
+    // });
   }
 
   listeners();
@@ -806,9 +827,8 @@ $(function() {
         'header a',
         '.blank-link-hover',
         '.entry-content a',
-        '.project-collage-column img',
         '.module a',
-        '.collage-link'
+        '.collage-link h2'
     ];
 
     Interlace.initialize({
@@ -856,3 +876,62 @@ $(function() {
     }, 1000); // This timeout should match the single_project.scss CSS transition
   }
 });
+
+$(document).on('ready', function() {
+  // if ( location.hash.length > 1 ) {
+  //   var hash = location.hash.substr(1);
+  //   var $el = $('[name="' + hash + '"], #' + hash);
+
+  //   setTimeout(function() {
+  //     $el = $('[name="' + hash + '"], #' + hash);
+  //     if($el.length) App.scrollTo($el);
+  //   }, 1);
+  // }
+
+  // App.smoothScrollOffset = $('.header').height() + 20;
+  App.smoothScrollOffset = 0;
+});
+
+$(document).on('click.smoothScrollEvents', 'a[href*="#"]:not([href="#"])', function(e) {
+  // If you want to disable the call to `e.preventDefault()` you can add a ` data-default-jump-link` attribute to the link.
+  // This is good if e.g. you want to enable the default history behavior for jump links.
+  // <a href="#jump-link" data-default-jump-link>the hash in this jump link get's added to the current URL as usual</a>
+
+  if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname && location.search == this.search) {
+    var target = $(this.hash);
+    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+    if (target.length) {
+      App.scrollTo(target);
+      if( $(this).attr('data-default-jump-link') === undefined ) {
+        e.preventDefault();
+      }
+    }
+  }
+});
+
+// Allow a user's scroll to override the App.scrollTo function
+$(document).on('scroll mousedown DOMMouseScroll mousewheel keyup', 'html, body', function(e) {
+  if ( e.which > 0 || e.type === 'mousedown' || e.type === 'mousewheel' ||  e.type === 'touchstart' ) {
+    $('html, body').stop();
+  }
+});
+
+App.scrollTo = function($target, duration) {
+  var durationToUse = duration !== undefined ? duration : 1000;
+
+  if($('html').hasClass('record') || $('html').hasClass('edit')) {
+    return;
+  }
+
+  if(!$target.length) {
+    console.warn('Can\'t find target to scroll to.', $target);
+    return;
+  }
+
+  $('html,body').animate({
+    scrollTop: $target.offset().top - App.smoothScrollOffset
+  }, {
+    duration: durationToUse,
+    easing: 'easeInOutQuart'
+  });
+};
