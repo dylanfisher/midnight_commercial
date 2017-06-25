@@ -45,12 +45,14 @@
 }
 
 .project-collage__media {
-  // height is a magic number that needs to match the height set in the acf-collage plugin
-  // height: 60vw;
   position: relative;
 }
 
 .collage-link {
   display: inline-block;
   text-decoration: none;
+}
+
+.project-collage__video {
+  pointer-events: none;
 }
