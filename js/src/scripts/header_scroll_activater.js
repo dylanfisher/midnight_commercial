@@ -16,6 +16,8 @@ $(function() {
         $header.removeClass('active');
       }
     });
+
+    $(window).trigger('scroll');
   }
 
 });

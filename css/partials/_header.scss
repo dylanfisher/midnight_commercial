@@ -38,6 +38,7 @@
 
   @include breakpoint(sm) {
     height: $header-height;
+    overflow: hidden;
   }
 }
 
