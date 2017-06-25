@@ -4,7 +4,7 @@
 
 .project-collage {
   position: relative;
-  margin-bottom: 100px;
+  margin-bottom: 200px;
   margin-left: auto;
   margin-right: auto;
 
@@ -39,6 +39,8 @@
 }
 
 .project-collage__title-area--mobile {
+  margin-bottom: -60px;
+
   @include breakpoint(md) {
     display: none;
   }
