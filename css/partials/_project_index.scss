@@ -5,11 +5,11 @@
 .project-collage {
   position: relative;
   margin-bottom: 100px;
-  width: 80%;
   margin-left: auto;
   margin-right: auto;
 
   @include breakpoint(sm) {
+    width: 80%;
     margin-bottom: 240px;
   }
 

@@ -708,12 +708,12 @@ Interlace.initialize = function(options) {
 
     createDivs(selector);
 
-    $(document).on('mouseenter', selector, function(e) {
+    $(document).on('mouseenter touchstart', selector, function(e) {
         if ( $(this).hasClass('static-interlace-item') ) return;
         moveDivs(e.target, 'to');
     });
 
-    $(document).on('mouseleave', selector, function(e) {
+    $(document).on('mouseleave touchend', selector, function(e) {
         if ( $(this).hasClass('static-interlace-item') ) return;
         moveDivs(e.target, 'from');
     });
@@ -899,6 +899,15 @@ $(function() {
             selector: interlaceSelectors.join(',')
         });
     }
+
+    var mobileNavInitialized = false;
+    $(document).on('mc:mobileNavOpen', function() {
+        if ( mobileNavInitialized ) return;
+        Interlace.initialize({
+            selector: '.menu a'
+        });
+        mobileNavInitialized = true;
+    });
 });
 
 $(document).on('click', '.hamburger', function() {
@@ -913,6 +922,7 @@ $(document).on('click', '.hamburger', function() {
 
   $('html').addClass('mobile-nav-activating');
 
+  $(document).trigger('mc:mobileNavOpen');
   $nav.transition({ height: height }, function() {
     $('html').addClass('mobile-nav-active');
   }, 'easeOutQuint');
@@ -926,6 +936,7 @@ $(document).on('click', '.mobile-nav-close', function() {
 
   $nav.transition({ height: 0 }, function() {
     $nav.hide();
+    $(document).trigger('mc:mobileNavClose');
     $('html').removeClass('mobile-nav-active mobile-nav-activating mobile-nav-deactivating');
   }, 'easeOutQuint');
 });

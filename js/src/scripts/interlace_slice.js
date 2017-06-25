@@ -15,12 +15,12 @@ Interlace.initialize = function(options) {
 
     createDivs(selector);
 
-    $(document).on('mouseenter', selector, function(e) {
+    $(document).on('mouseenter touchstart', selector, function(e) {
         if ( $(this).hasClass('static-interlace-item') ) return;
         moveDivs(e.target, 'to');
     });
 
-    $(document).on('mouseleave', selector, function(e) {
+    $(document).on('mouseleave touchend', selector, function(e) {
         if ( $(this).hasClass('static-interlace-item') ) return;
         moveDivs(e.target, 'from');
     });
@@ -206,4 +206,13 @@ $(function() {
             selector: interlaceSelectors.join(',')
         });
     }
+
+    var mobileNavInitialized = false;
+    $(document).on('mc:mobileNavOpen', function() {
+        if ( mobileNavInitialized ) return;
+        Interlace.initialize({
+            selector: '.menu a'
+        });
+        mobileNavInitialized = true;
+    });
 });
