@@ -169,14 +169,41 @@ Interlace.initialize = function(options) {
 
 $(function() {
     var interlaceSelectors = [
-        'header a',
         '.blank-link-hover',
         '.entry-content a',
         '.module a',
         '.collage-link h2'
     ];
 
+    if ( App.breakpoint.isMobile() ) {
+        interlaceSelectors.push('.site-title a');
+    } else {
+        interlaceSelectors.push('.header a');
+    }
+
     Interlace.initialize({
         selector: interlaceSelectors.join(',')
     });
+
+    $(window).resize( $.debounce( 250, resizeEvents ) );
+
+    // Tear down all slices on resize
+    function resizeEvents() {
+        var $slices = $('.slice-wrapper.active');
+
+        $slices.each(function() {
+            var $slice = $(this);
+
+            $slice.find('.static-interlace-item').removeClass('static-interlace-item');
+
+            var originalHTML = $slice.find('.slice-original-item').html();
+
+            $slice.after(originalHTML);
+            $slice.remove();
+        });
+
+        Interlace.initialize({
+            selector: interlaceSelectors.join(',')
+        });
+    }
 });

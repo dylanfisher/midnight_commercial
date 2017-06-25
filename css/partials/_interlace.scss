@@ -51,7 +51,10 @@
 
   &.active {
     .slice-original-item {
-      color: transparent;
+      &,
+      a {
+        color: transparent !important;
+      }
     }
   }
 }

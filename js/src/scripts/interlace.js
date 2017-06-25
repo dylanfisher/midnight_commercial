@@ -345,4 +345,25 @@ $(function() {
       el: $(this)
     });
   });
+
+  $(window).resize( $.debounce( 250, resizeEvents ) );
+
+  // Tear down all slices on resize
+  function resizeEvents() {
+    var $slices = $('.interlace');
+
+    $slices.each(function() {
+      var $slice = $(this);
+      var originalHTML = $slice.find('.interlace-item').html();
+
+      $slice.find('.interlace-item').removeClass('active');
+      $slice.find('.interlace-clone-wrapper').remove();
+    });
+
+    $('.interlace').each(function() {
+      App.interlace({
+        el: $(this)
+      });
+    });
+  }
 });
