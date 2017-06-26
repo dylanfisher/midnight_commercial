@@ -294,12 +294,15 @@ App.breakpoint.isMobile = function() {
 $(function() {
   var $homeSplashArea = $('.home-page-splash-area');
   var $header = $('.header');
+  var $seeMore = $('.home-page-see-more');
 
   if ( $homeSplashArea.length ) {
     var splashHeight = $homeSplashArea.height();
+    var seeMoreOffset = $seeMore.offset().top / 2;
 
     $(window).resize(function() {
       splashHeight = $homeSplashArea.height();
+      seeMoreOffset = $seeMore.offset().top / 2;
     });
 
     $(window).on('scroll mc:headerScrollActivater', function() {
@@ -307,6 +310,12 @@ $(function() {
         $header.addClass('active');
       } else {
         $header.removeClass('active');
+      }
+
+      if ( App.scrollTop > seeMoreOffset ) {
+        $seeMore.addClass('active');
+      } else {
+        $seeMore.removeClass('active');
       }
     });
 
@@ -761,14 +770,20 @@ Interlace.initialize = function(options) {
 
     $elements.off('mouseenter.interlaceSliceEvents touchstart.interlaceSliceEvents');
     $elements.on('mouseenter.interlaceSliceEvents touchstart.interlaceSliceEvents', function(e) {
-        if ( $(this).hasClass('static-interlace-item') ) return;
-        moveDivs(e.target, 'to');
+        if ( $(this).hasClass('static-interlace-item') ) {
+            moveDivs(e.target, 'from');
+        } else {
+            moveDivs(e.target, 'to');
+        }
     });
 
     $elements.off('mouseleave.interlaceSliceEvents touchend.interlaceSliceEvents');
     $elements.on('mouseleave.interlaceSliceEvents touchend.interlaceSliceEvents', function(e) {
-        if ( $(this).hasClass('static-interlace-item') ) return;
-        moveDivs(e.target, 'from');
+        if ( $(this).hasClass('static-interlace-item') ) {
+            moveDivs(e.target, 'to');
+        } else {
+            moveDivs(e.target, 'from');
+        }
     });
 
     $('.current-menu-item a, .current_page_item a').on('mc:initialized', function() {
