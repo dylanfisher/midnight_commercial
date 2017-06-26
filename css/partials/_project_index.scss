@@ -33,6 +33,8 @@
 
 .project-collage__title-area--desktop {
   display: none;
+  z-index: 100 !important;
+
   @include breakpoint(md) {
     display: block;
   }

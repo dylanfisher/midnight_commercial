@@ -18,11 +18,11 @@ $(function() {
 
         player.play().then(function() {
           player.pause();
-          $(window).trigger('scroll');
+          $(window).trigger('mc:projectCollageVideoInit');
         });
       });
 
-      $(window).scroll(function() {
+      $(window).on('scroll mc:projectCollageVideoInit', function() {
         $videos.each(function(index) {
           var $video = $(this);
 
@@ -34,7 +34,7 @@ $(function() {
         });
       });
 
-      $(window).trigger('scroll');
+      $(window).trigger('mc:projectCollageVideoInit');
     }
   }
 });

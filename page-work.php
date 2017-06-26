@@ -21,7 +21,7 @@
     </div>
     <div class="home-page-see-more">
       <div class="home-page-see-more__text">See our work</div>
-      <div class="home-page-see-more__arrow">V</div>
+      <div class="home-page-see-more__arrow"></div>
     </div>
   </div>
 
@@ -33,21 +33,34 @@
       $post_status = array( 'publish', 'pending', 'draft', 'private' );
     }
 
+    $paged = 1;
+    $request_url = $_SERVER['REQUEST_URI'];
+    preg_match( '/page\/(\d*)\/?/', $request_url, $matches );
+    if ( array_key_exists( 1, $matches ) ):
+      $paged = intval( $matches[1] );
+    endif;
+
     $args = array(
       'post_type' => array( 'project' ),
-      'posts_per_page' => 12, // TODO: infinite scroll pagination
+      'posts_per_page' => 1,
       'orderby' => 'date',
-      'post_status' => $post_status
+      'post_status' => $post_status,
+      'paged' => $paged
     );
 
     $the_query = new WP_Query( $args );
 
     if ( $the_query->have_posts() ):
       echo '<div class="work-anchor-link" id="work"></div>';
-      while ( $the_query->have_posts() ):
-        $the_query->the_post();
-        get_template_part( 'partials/project_collage' );
-      endwhile;
+        echo '<div class="project-collage-wrapper">';
+        while ( $the_query->have_posts() ):
+          $the_query->the_post();
+          get_template_part( 'partials/project_collage' );
+        endwhile;
+        echo '<div class="next-page-wrapper">';
+          echo get_next_posts_link( 'Next page', $the_query->max_num_pages );
+        echo '</div>';
+      echo '</div>';
     wp_reset_postdata();
     else:
       echo '<p>No works are available.</p>';

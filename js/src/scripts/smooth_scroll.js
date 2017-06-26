@@ -31,11 +31,11 @@ $(document).on('click.smoothScrollEvents', 'a[href*="#"]:not([href="#"])', funct
 });
 
 // Allow a user's scroll to override the App.scrollTo function
-$(document).on('scroll mousedown DOMMouseScroll mousewheel keyup', 'html, body', function(e) {
-  if ( e.which > 0 || e.type === 'mousedown' || e.type === 'mousewheel' ||  e.type === 'touchstart' ) {
-    $('html, body').stop();
-  }
-});
+// $(document).on('scroll mousedown DOMMouseScroll mousewheel keyup', 'html, body', function(e) {
+//   if ( e.which > 0 || e.type === 'mousedown' || e.type === 'mousewheel' ||  e.type === 'touchstart' ) {
+//     $('html, body').stop();
+//   }
+// });
 
 App.scrollTo = function($target, duration) {
   var durationToUse = duration !== undefined ? duration : 1000;

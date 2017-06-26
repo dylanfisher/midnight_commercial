@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="site-title">
-              <a class="slice-item" href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
+              <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
             </div>
             <nav class="nav">
               <?php wp_nav_menu(); ?>

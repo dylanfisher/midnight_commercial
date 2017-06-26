@@ -46,6 +46,16 @@
   transform: translate(-50%, 0);
 }
 
+.home-page-see-more__arrow {
+  background-image: url(images/ui/arrow-down@2x.png);
+  background-size: 28px 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 28px;
+  height: 16px;
+  margin: 10px auto 0;
+}
+
 .work-anchor-link {
   padding-top: $header-height;
 }

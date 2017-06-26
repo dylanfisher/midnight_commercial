@@ -9,7 +9,7 @@ $(function() {
       splashHeight = $homeSplashArea.height();
     });
 
-    $(window).scroll(function() {
+    $(window).on('scroll mc:headerScrollActivater', function() {
       if ( App.scrollTop > splashHeight ) {
         $header.addClass('active');
       } else {
@@ -17,7 +17,7 @@ $(function() {
       }
     });
 
-    $(window).trigger('scroll');
+    $(window).trigger('mc:headerScrollActivater');
   }
 
 });

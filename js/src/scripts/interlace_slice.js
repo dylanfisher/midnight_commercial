@@ -7,26 +7,28 @@ Interlace.initialize = function(options) {
 
     options = options || {};
 
-    var selector = options.selector;
+    var $elements = options.elements;
 
     // Parameters
     var minDur = 30;
     var maxDur = 120;
 
-    createDivs(selector);
+    createDivs($elements);
 
-    $(document).on('mouseenter touchstart', selector, function(e) {
+    $elements.off('mouseenter.interlaceSliceEvents touchstart.interlaceSliceEvents');
+    $elements.on('mouseenter.interlaceSliceEvents touchstart.interlaceSliceEvents', function(e) {
         if ( $(this).hasClass('static-interlace-item') ) return;
         moveDivs(e.target, 'to');
     });
 
-    $(document).on('mouseleave touchend', selector, function(e) {
+    $elements.off('mouseleave.interlaceSliceEvents touchend.interlaceSliceEvents');
+    $elements.on('mouseleave.interlaceSliceEvents touchend.interlaceSliceEvents', function(e) {
         if ( $(this).hasClass('static-interlace-item') ) return;
         moveDivs(e.target, 'from');
     });
 
     $('.current-menu-item a, .current_page_item a').on('mc:initialized', function() {
-        $(this).trigger('mouseenter');
+        $(this).trigger('mouseenter.interlaceSliceEvents');
         $(this).addClass('static-interlace-item');
     });
 
@@ -69,10 +71,14 @@ Interlace.initialize = function(options) {
         $sliceWrapper.append('<div class="slice-clone-wrapper"></div>');
     }
 
-    function createDivs(className) {
-        var allSlicedTyped = $(className);
-        allSlicedTyped.each(function() {
+    function createDivs($sliceElements) {
+        $sliceElements.each(function() {
             var $this = $(this);
+            var $sliceWrapper = $this.closest('.slice-wrapper');
+
+            // Don't initialize twice
+            if ( $sliceWrapper.length && $sliceWrapper.hasClass('active') ) return;
+
             var hasImg = ( $this.find('img').length || $this.is('img') ) ? true : false;
             if ( hasImg ) {
                 $this.imagesLoaded(function() {
@@ -116,7 +122,7 @@ Interlace.initialize = function(options) {
                     var $cloneItem = $cloneWrapper.find('.slice-clone').eq(i);
                     var $cloneContent = $cloneItem.find('.slice-clone__content');
                     var startShift = getRandomInt(-xShift, xShift); // start position/shift for that slice
-                    var left = className.indexOf('onoff') > -1 ? startShift : 0; // if onoff, i.e. sliced at the beginning
+                    var left = 0; // if onoff, i.e. sliced at the beginning
 
                     $cloneItem.data({
                         'data-shift': startShift,
@@ -168,51 +174,63 @@ Interlace.initialize = function(options) {
 };
 
 $(function() {
-    var interlaceSelectors = [
+    var initialSelectors = [
         '.blank-link-hover',
         '.entry-content a',
         '.module a',
-        '.collage-link h2'
+        '.project-collage-wrapper .collage-link h2'
     ];
+    var $interlaceItems = $( initialSelectors.join(', ') );
 
     if ( App.breakpoint.isMobile() ) {
-        interlaceSelectors.push('.site-title a');
+        $interlaceItems = $interlaceItems.add( $('.site-title a') );
     } else {
-        interlaceSelectors.push('.header a');
+        $interlaceItems = $interlaceItems.add( $('.header a') );
     }
 
     Interlace.initialize({
-        selector: interlaceSelectors.join(',')
+        elements: $interlaceItems
     });
 
-    $(window).resize( $.debounce( 250, resizeEvents ) );
-
-    // Tear down all slices on resize
-    function resizeEvents() {
-        var $slices = $('.slice-wrapper.active');
-
-        $slices.each(function() {
-            var $slice = $(this);
-
-            $slice.find('.static-interlace-item').removeClass('static-interlace-item');
-
-            var originalHTML = $slice.find('.slice-original-item').html();
-
-            $slice.after(originalHTML);
-            $slice.remove();
-        });
+    $(window).on('reize', $.debounce( 250, function() {
+        // Tear down all slices on resize
+        App.destroyInterlaceSlice( $('html') );
 
         Interlace.initialize({
-            selector: interlaceSelectors.join(',')
+            elements: $interlaceItems
         });
-    }
+    } ));
 
     var mobileNavInitialized = false;
     $(document).on('mc:mobileNavOpen', function() {
         if ( mobileNavInitialized ) return;
+        App.destroyInterlaceSlice( $('.menu') );
         Interlace.initialize({
-            selector: '.menu a'
+            elements: $('.menu a')
         });
         mobileNavInitialized = true;
     });
 });
+
+$(document).on('mc:projectCollageInit', function() {
+    App.destroyInterlaceSlice( $('.project-collage-wrapper') );
+
+    Interlace.initialize({
+        elements: $('.project-collage-wrapper .collage-link h2')
+    });
+});
+
+App.destroyInterlaceSlice = function($parent) {
+    var $slices = $parent.find('.slice-wrapper');
+
+    $slices.each(function() {
+        var $slice = $(this);
+
+        $slice.find('.static-interlace-item').removeClass('static-interlace-item');
+
+        var originalHTML = $slice.find('.slice-original-item').html();
+
+        $slice.after(originalHTML);
+        $slice.remove();
+    });
+};
