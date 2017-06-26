@@ -60,3 +60,11 @@
 .project-collage__video {
   pointer-events: none;
 }
+
+.next-page-wrapper {
+  text-align: center;
+
+  a {
+    @include blank-link;
+  }
+}

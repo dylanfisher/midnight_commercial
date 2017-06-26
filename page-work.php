@@ -42,7 +42,7 @@
 
     $args = array(
       'post_type' => array( 'project' ),
-      'posts_per_page' => 1,
+      'posts_per_page' => 6,
       'orderby' => 'date',
       'post_status' => $post_status,
       'paged' => $paged
@@ -58,7 +58,7 @@
           get_template_part( 'partials/project_collage' );
         endwhile;
         echo '<div class="next-page-wrapper">';
-          echo get_next_posts_link( 'Next page', $the_query->max_num_pages );
+          echo get_next_posts_link( 'Loading...', $the_query->max_num_pages );
         echo '</div>';
       echo '</div>';
     wp_reset_postdata();

@@ -1015,6 +1015,10 @@ $(document).on('click', '.mobile-nav-close', function() {
 $(function() {
   initVideos();
 
+  $(document).on('mc:projectCollageInit', function() {
+    initVideos();
+  });
+
   function initVideos() {
     if ( App.breakpoint.isMobile() ) return;
 
@@ -1031,7 +1035,9 @@ $(function() {
         players.push( player );
 
         player.play().then(function() {
-          player.pause();
+          if ( !$video.visible(true) ) {
+            player.pause();
+          }
           $(window).trigger('mc:projectCollageVideoInit');
         });
       });
