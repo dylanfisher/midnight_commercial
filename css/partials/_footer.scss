@@ -49,8 +49,4 @@ $footer-push-height: 300px;
   @include breakpoint(sm) {
     margin-left: $gutter;
   }
-
-  &:first-child {
-    margin-left: 0;
-  }
 }
