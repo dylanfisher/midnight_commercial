@@ -19,22 +19,20 @@ App.interlace = function(options) {
   var stopAnimating = false;
   var previousShiftMode;
 
+  // params
+  var $original      = $container.find('.interlace-item'); // original that's hidden on the page
+  var fontSize       = parseInt( $original.css('font-size') ); // change in css
+  var lineHeight     = parseInt( $original.css('line-height') ); // change in css
+  var fontHeight     = $original.height() * lineHeight / fontSize; // height of the type container
+  var originalHeight = $original.outerHeight( true ); // height of the type container
+
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
   // var sliceRatio = 4.2;
-  var sliceRatio = App.windowWidth / 16 / 10;
+  // var sliceRatio = App.windowWidth / fontSize;
+  var sliceRatio = fontSize / 12;
   // console.log('sliceRatio', sliceRatio);
 
-  if ( $container.hasClass('interlace-large') ) {
-    sliceRatio = 12;
-  }
-
-  // params
-  var $original      = $container.find('.interlace-item'); // original that's hidden on the page
-  var fontSize       = parseInt( $original.css('font-size').replace('px', '') ); // change in css
-  var lineHeight     = parseInt( $original.css('line-height').replace('px', '') ); // change in css
-  var fontHeight     = $original.height() * lineHeight / fontSize; // height of the type container
-  var originalHeight = $original.outerHeight( true ); // height of the type container
   var sliceNum       = Math.round( originalHeight / sliceRatio ); // number of slices
   var sliceHeight    = Math.ceil( fontHeight / sliceNum ); // round up to have whole px, FIX flicker
   var intervalTime   = 1000; // time for each shift

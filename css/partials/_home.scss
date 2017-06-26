@@ -21,9 +21,26 @@
   width: 100%;
   line-height: 1;
 
+  .interlace-clone[data-index="0"],
+  .interlace-clone[data-index="1"],
+  .interlace-clone[data-index="2"],
+  .interlace-clone[data-index="3"],
+  .interlace-clone[data-index="4"] {
+    // visibility: hidden;
+  }
+
   @include breakpoint(sm) {
     font-size: 10vw;
+
+    .interlace-clone[data-index="3"],
+    .interlace-clone[data-index="4"] {
+      // visibility: visible;
+    }
   }
+}
+
+.interlaced-logo {
+  padding-bottom: 10px;
 }
 
 .home-page-tagline {
