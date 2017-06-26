@@ -6,7 +6,9 @@
       <div class="interlaced-logo-wrapper">
         <div class="interlace">
           <div class="interlace-item">
-            <div class="interlaced-logo">Midnight Commercial</div>
+            <div class="interlaced-logo">
+              <div class="interlaced-logo__text">Midnight Commercial</div>
+            </div>
           </div>
         </div>
       </div>
