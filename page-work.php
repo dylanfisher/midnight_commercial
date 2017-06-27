@@ -7,7 +7,12 @@
         <div class="interlace">
           <div class="interlace-item">
             <div class="interlaced-logo">
-              <div class="interlaced-logo__text">Midnight Commercial</div>
+              <div class="interlaced-logo__desktop">
+                <?php get_template_part( 'images/svg/midnight_commercial_logo.svg' ); ?>
+              </div>
+              <div class="interlaced-logo__mobile">
+                <?php get_template_part( 'images/svg/midnight_commercial_logo_mobile.svg' ); ?>
+              </div>
             </div>
           </div>
         </div>

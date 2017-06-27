@@ -21,13 +21,38 @@
   width: 100%;
   line-height: 1;
 
+  .interlace-item.active {
+    svg {
+      visibility: hidden;
+    }
+  }
+
   @include breakpoint(sm) {
     font-size: 10vw;
   }
 }
 
 .interlaced-logo {
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
+
+  svg {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.interlaced-logo__desktop {
+  display: none;
+
+  @include breakpoint(sm) {
+    display: block;
+  }
+}
+
+.interlaced-logo__mobile {
+  @include breakpoint(sm) {
+    display: none;
+  }
 }
 
 .home-page-tagline {
