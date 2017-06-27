@@ -10,4 +10,8 @@
 
 .image-caption {
   margin-top: $space-tiny;
+
+  a {
+    @include default-link;
+  }
 }
