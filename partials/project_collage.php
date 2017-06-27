@@ -1,6 +1,8 @@
 <?php
   $collage_data = json_decode ( get_field( 'collage' ), true );
-  $collage_height = isset( $collage_data['canvasHeightRatio'] ) ? $collage_data['canvasHeightRatio'] : 60;
+  // Adjusted width represents the 80% width of the collage media items.
+  $project_collage_adjusted_width = 30;
+  $collage_height = isset( $collage_data['canvasHeightRatio'] ) ? ( $collage_data['canvasHeightRatio'] - $project_collage_adjusted_width ) : 60;
 ?>
 
 <?php ob_start(); ?>
