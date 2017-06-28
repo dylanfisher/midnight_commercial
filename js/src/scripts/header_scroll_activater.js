@@ -1,25 +1,26 @@
 $(function() {
   var $homeSplashArea = $('.home-page-splash-area');
+  var $homeTaglineArea = $('.home-page-tagline-logo-area');
   var $header = $('.header');
   var $seeMore = $('.home-page-see-more');
 
   if ( $homeSplashArea.length ) {
-    var splashHeight = $homeSplashArea.height();
-    var seeMoreOffset = $seeMore.offset().top / 2;
+    var headerActivationPoint = $homeTaglineArea.offset().top + $homeTaglineArea.height() + 20;
+    var seeMoreActivationPoint = App.windowHeight / 3;
 
     $(window).resize(function() {
-      splashHeight = $homeSplashArea.height();
-      seeMoreOffset = $seeMore.offset().top / 2;
+      headerActivationPoint = $homeTaglineArea.offset().top + $homeTaglineArea.height() + 20;
+      seeMoreActivationPoint = App.windowHeight / 3;
     });
 
     $(window).on('scroll mc:headerScrollActivater', function() {
-      if ( App.scrollTop > splashHeight ) {
+      if ( App.scrollTop > headerActivationPoint ) {
         $header.addClass('active');
       } else {
         $header.removeClass('active');
       }
 
-      if ( App.scrollTop > seeMoreOffset ) {
+      if ( App.scrollTop > seeMoreActivationPoint ) {
         $seeMore.addClass('active');
       } else {
         $seeMore.removeClass('active');
