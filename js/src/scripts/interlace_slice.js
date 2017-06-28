@@ -186,24 +186,29 @@ $(function() {
         '.module a',
         '.project-collage-wrapper .collage-link h2'
     ];
-    var $interlaceItems = $( initialSelectors.join(', ') );
 
-    if ( App.breakpoint.isMobile() ) {
-        $interlaceItems = $interlaceItems.add( $('.site-title a') );
-    } else {
-        $interlaceItems = $interlaceItems.add( $('.header a') );
+    function getInterlaceItems() {
+        var $items = $( initialSelectors.join(', ') );
+
+        if ( App.breakpoint.isMobile() ) {
+            $items = $items.add( $('.site-title a') );
+        } else {
+            $items = $items.add( $('.header a') );
+        }
+
+        return $items;
     }
 
     Interlace.initialize({
-        elements: $interlaceItems
+        elements: getInterlaceItems()
     });
 
-    $(window).on('reize', $.debounce( 250, function() {
+    $(window).on('resize', $.debounce( 250, function() {
         // Tear down all slices on resize
         App.destroyInterlaceSlice( $('html') );
 
         Interlace.initialize({
-            elements: $interlaceItems
+            elements: getInterlaceItems()
         });
     } ));
 

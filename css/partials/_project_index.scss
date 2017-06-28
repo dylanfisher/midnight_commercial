@@ -35,15 +35,15 @@
   display: none;
   z-index: 100 !important;
 
-  @include breakpoint(md) {
+  @include breakpoint(sm) {
     display: block;
   }
 }
 
 .project-collage__title-area--mobile {
-  margin-bottom: -60px;
+  // margin-bottom: -60px;
 
-  @include breakpoint(md) {
+  @include breakpoint(sm) {
     display: none;
   }
 }

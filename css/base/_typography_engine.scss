@@ -9,12 +9,8 @@ $sans-serif: 'calibre_regular', sans-serif;
   letter-spacing: 0px;
 
   @include breakpoint(sm) {
-    font-size: 32px;
+    font-size: 2vw;
     line-height: 1.2;
-  }
-
-  @include breakpoint(xl) {
-    font-size: 36px;
   }
 }
 .font-regular { @include font--regular; }
