@@ -153,7 +153,11 @@ $(function() {
     });
   });
 
-  $(window).resize( $.debounce( 250, resizeEvents ) );
+  // iOS Safari has an annoying resize behavior with the little browser bar. So, disable resize
+  // events when in the mobile breakpoint.
+  if ( !App.breakpoint.isMobile() ) {
+    $(window).resize( $.debounce( 250, resizeEvents ) );
+  }
 
   // Tear down all slices on resize
   function resizeEvents() {
