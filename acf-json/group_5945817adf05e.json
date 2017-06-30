@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "1. Add a series of collage items in the collage items tab.\r\n2. Update\/save this project.\r\n3. Adjust the canvas height by dragging the bottom of the canvas.\r\n4. Arrange the collage items into the layout you want. Publish the page or save it as a draft to preview the collage as it displays on the Works page.\r\n\r\n* When changing or replacing collage items, you need to update\/save the project for the new images to become visible.",
+            "message": "1. Add a series of collage items in the collage items tab.\r\n2. Update\/save this project.\r\n3. Arrange the collage items into the layout you want.",
             "new_lines": "wpautop",
             "esc_html": 0
         },
@@ -136,6 +136,48 @@
                             },
                             "width": "",
                             "height": ""
+                        },
+                        {
+                            "key": "field_5955a7a1b515e",
+                            "label": "Aspect Ratio Width",
+                            "name": "aspect_ratio_width",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 16,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
+                        },
+                        {
+                            "key": "field_5955a7d6b515f",
+                            "label": "Aspect Ratio Height",
+                            "name": "aspect_ratio_height",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 9,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
                         }
                     ],
                     "min": "",
@@ -166,5 +208,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1498409220
+    "modified": 1498785763
 }

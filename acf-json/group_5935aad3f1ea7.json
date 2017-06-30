@@ -169,6 +169,48 @@
                             "height": ""
                         },
                         {
+                            "key": "field_5955a7efb9e6d",
+                            "label": "Aspect Ratio Width",
+                            "name": "aspect_ratio_width",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 16,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
+                        },
+                        {
+                            "key": "field_5955a7feb9e6e",
+                            "label": "Aspect Ratio Height",
+                            "name": "aspect_ratio_height",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 9,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
+                        },
+                        {
                             "key": "field_593c3f1ecef32",
                             "label": "Caption",
                             "name": "caption",
@@ -212,7 +254,7 @@
             {
                 "param": "page",
                 "operator": "!=",
-                "value": "5"
+                "value": "16"
             },
             {
                 "param": "page",
@@ -238,5 +280,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1497134512
+    "modified": 1498785798
 }

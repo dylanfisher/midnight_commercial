@@ -1,4 +1,16 @@
-<div class="project-collage__video responsive-embed-wrapper">
+<?php
+  $width = get_sub_field( 'aspect_ratio_width' );
+  $height = get_sub_field( 'aspect_ratio_height' );
+
+  $style = '';
+
+  if ( $width && $height ):
+    $ratio = $height / $width * 100;
+    $style = 'padding-bottom: ' . $ratio . '%;';
+  endif;
+?>
+
+<div class="project-collage__video responsive-embed-wrapper" style="<?php echo $style; ?>">
   <?php
     $video_embed_url = get_sub_field('video');
     preg_match( '/src=".*?vimeo.com\/video\/(\d*)"/', $video_embed_url, $matches );
