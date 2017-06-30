@@ -223,6 +223,317 @@ jQuery.extend( jQuery.easing,
 (function(t,e){if(typeof define==="function"&&define.amd){define(["jquery"],e)}else if(typeof exports==="object"){module.exports=e(require("jquery"))}else{e(t.jQuery)}})(this,function(t){t.transit={version:"0.9.12",propertyMap:{marginLeft:"margin",marginRight:"margin",marginBottom:"margin",marginTop:"margin",paddingLeft:"padding",paddingRight:"padding",paddingBottom:"padding",paddingTop:"padding"},enabled:true,useTransitionEnd:false};var e=document.createElement("div");var n={};function i(t){if(t in e.style)return t;var n=["Moz","Webkit","O","ms"];var i=t.charAt(0).toUpperCase()+t.substr(1);for(var r=0;r<n.length;++r){var s=n[r]+i;if(s in e.style){return s}}}function r(){e.style[n.transform]="";e.style[n.transform]="rotateY(90deg)";return e.style[n.transform]!==""}var s=navigator.userAgent.toLowerCase().indexOf("chrome")>-1;n.transition=i("transition");n.transitionDelay=i("transitionDelay");n.transform=i("transform");n.transformOrigin=i("transformOrigin");n.filter=i("Filter");n.transform3d=r();var a={transition:"transitionend",MozTransition:"transitionend",OTransition:"oTransitionEnd",WebkitTransition:"webkitTransitionEnd",msTransition:"MSTransitionEnd"};var o=n.transitionEnd=a[n.transition]||null;for(var u in n){if(n.hasOwnProperty(u)&&typeof t.support[u]==="undefined"){t.support[u]=n[u]}}e=null;t.cssEase={_default:"ease","in":"ease-in",out:"ease-out","in-out":"ease-in-out",snap:"cubic-bezier(0,1,.5,1)",easeInCubic:"cubic-bezier(.550,.055,.675,.190)",easeOutCubic:"cubic-bezier(.215,.61,.355,1)",easeInOutCubic:"cubic-bezier(.645,.045,.355,1)",easeInCirc:"cubic-bezier(.6,.04,.98,.335)",easeOutCirc:"cubic-bezier(.075,.82,.165,1)",easeInOutCirc:"cubic-bezier(.785,.135,.15,.86)",easeInExpo:"cubic-bezier(.95,.05,.795,.035)",easeOutExpo:"cubic-bezier(.19,1,.22,1)",easeInOutExpo:"cubic-bezier(1,0,0,1)",easeInQuad:"cubic-bezier(.55,.085,.68,.53)",easeOutQuad:"cubic-bezier(.25,.46,.45,.94)",easeInOutQuad:"cubic-bezier(.455,.03,.515,.955)",easeInQuart:"cubic-bezier(.895,.03,.685,.22)",easeOutQuart:"cubic-bezier(.165,.84,.44,1)",easeInOutQuart:"cubic-bezier(.77,0,.175,1)",easeInQuint:"cubic-bezier(.755,.05,.855,.06)",easeOutQuint:"cubic-bezier(.23,1,.32,1)",easeInOutQuint:"cubic-bezier(.86,0,.07,1)",easeInSine:"cubic-bezier(.47,0,.745,.715)",easeOutSine:"cubic-bezier(.39,.575,.565,1)",easeInOutSine:"cubic-bezier(.445,.05,.55,.95)",easeInBack:"cubic-bezier(.6,-.28,.735,.045)",easeOutBack:"cubic-bezier(.175, .885,.32,1.275)",easeInOutBack:"cubic-bezier(.68,-.55,.265,1.55)"};t.cssHooks["transit:transform"]={get:function(e){return t(e).data("transform")||new f},set:function(e,i){var r=i;if(!(r instanceof f)){r=new f(r)}if(n.transform==="WebkitTransform"&&!s){e.style[n.transform]=r.toString(true)}else{e.style[n.transform]=r.toString()}t(e).data("transform",r)}};t.cssHooks.transform={set:t.cssHooks["transit:transform"].set};t.cssHooks.filter={get:function(t){return t.style[n.filter]},set:function(t,e){t.style[n.filter]=e}};if(t.fn.jquery<"1.8"){t.cssHooks.transformOrigin={get:function(t){return t.style[n.transformOrigin]},set:function(t,e){t.style[n.transformOrigin]=e}};t.cssHooks.transition={get:function(t){return t.style[n.transition]},set:function(t,e){t.style[n.transition]=e}}}p("scale");p("scaleX");p("scaleY");p("translate");p("rotate");p("rotateX");p("rotateY");p("rotate3d");p("perspective");p("skewX");p("skewY");p("x",true);p("y",true);function f(t){if(typeof t==="string"){this.parse(t)}return this}f.prototype={setFromString:function(t,e){var n=typeof e==="string"?e.split(","):e.constructor===Array?e:[e];n.unshift(t);f.prototype.set.apply(this,n)},set:function(t){var e=Array.prototype.slice.apply(arguments,[1]);if(this.setter[t]){this.setter[t].apply(this,e)}else{this[t]=e.join(",")}},get:function(t){if(this.getter[t]){return this.getter[t].apply(this)}else{return this[t]||0}},setter:{rotate:function(t){this.rotate=b(t,"deg")},rotateX:function(t){this.rotateX=b(t,"deg")},rotateY:function(t){this.rotateY=b(t,"deg")},scale:function(t,e){if(e===undefined){e=t}this.scale=t+","+e},skewX:function(t){this.skewX=b(t,"deg")},skewY:function(t){this.skewY=b(t,"deg")},perspective:function(t){this.perspective=b(t,"px")},x:function(t){this.set("translate",t,null)},y:function(t){this.set("translate",null,t)},translate:function(t,e){if(this._translateX===undefined){this._translateX=0}if(this._translateY===undefined){this._translateY=0}if(t!==null&&t!==undefined){this._translateX=b(t,"px")}if(e!==null&&e!==undefined){this._translateY=b(e,"px")}this.translate=this._translateX+","+this._translateY}},getter:{x:function(){return this._translateX||0},y:function(){return this._translateY||0},scale:function(){var t=(this.scale||"1,1").split(",");if(t[0]){t[0]=parseFloat(t[0])}if(t[1]){t[1]=parseFloat(t[1])}return t[0]===t[1]?t[0]:t},rotate3d:function(){var t=(this.rotate3d||"0,0,0,0deg").split(",");for(var e=0;e<=3;++e){if(t[e]){t[e]=parseFloat(t[e])}}if(t[3]){t[3]=b(t[3],"deg")}return t}},parse:function(t){var e=this;t.replace(/([a-zA-Z0-9]+)\((.*?)\)/g,function(t,n,i){e.setFromString(n,i)})},toString:function(t){var e=[];for(var i in this){if(this.hasOwnProperty(i)){if(!n.transform3d&&(i==="rotateX"||i==="rotateY"||i==="perspective"||i==="transformOrigin")){continue}if(i[0]!=="_"){if(t&&i==="scale"){e.push(i+"3d("+this[i]+",1)")}else if(t&&i==="translate"){e.push(i+"3d("+this[i]+",0)")}else{e.push(i+"("+this[i]+")")}}}}return e.join(" ")}};function c(t,e,n){if(e===true){t.queue(n)}else if(e){t.queue(e,n)}else{t.each(function(){n.call(this)})}}function l(e){var i=[];t.each(e,function(e){e=t.camelCase(e);e=t.transit.propertyMap[e]||t.cssProps[e]||e;e=h(e);if(n[e])e=h(n[e]);if(t.inArray(e,i)===-1){i.push(e)}});return i}function d(e,n,i,r){var s=l(e);if(t.cssEase[i]){i=t.cssEase[i]}var a=""+y(n)+" "+i;if(parseInt(r,10)>0){a+=" "+y(r)}var o=[];t.each(s,function(t,e){o.push(e+" "+a)});return o.join(", ")}t.fn.transition=t.fn.transit=function(e,i,r,s){var a=this;var u=0;var f=true;var l=t.extend(true,{},e);if(typeof i==="function"){s=i;i=undefined}if(typeof i==="object"){r=i.easing;u=i.delay||0;f=typeof i.queue==="undefined"?true:i.queue;s=i.complete;i=i.duration}if(typeof r==="function"){s=r;r=undefined}if(typeof l.easing!=="undefined"){r=l.easing;delete l.easing}if(typeof l.duration!=="undefined"){i=l.duration;delete l.duration}if(typeof l.complete!=="undefined"){s=l.complete;delete l.complete}if(typeof l.queue!=="undefined"){f=l.queue;delete l.queue}if(typeof l.delay!=="undefined"){u=l.delay;delete l.delay}if(typeof i==="undefined"){i=t.fx.speeds._default}if(typeof r==="undefined"){r=t.cssEase._default}i=y(i);var p=d(l,i,r,u);var h=t.transit.enabled&&n.transition;var b=h?parseInt(i,10)+parseInt(u,10):0;if(b===0){var g=function(t){a.css(l);if(s){s.apply(a)}if(t){t()}};c(a,f,g);return a}var m={};var v=function(e){var i=false;var r=function(){if(i){a.unbind(o,r)}if(b>0){a.each(function(){this.style[n.transition]=m[this]||null})}if(typeof s==="function"){s.apply(a)}if(typeof e==="function"){e()}};if(b>0&&o&&t.transit.useTransitionEnd){i=true;a.bind(o,r)}else{window.setTimeout(r,b)}a.each(function(){if(b>0){this.style[n.transition]=p}t(this).css(l)})};var z=function(t){this.offsetWidth;v(t)};c(a,f,z);return this};function p(e,i){if(!i){t.cssNumber[e]=true}t.transit.propertyMap[e]=n.transform;t.cssHooks[e]={get:function(n){var i=t(n).css("transit:transform");return i.get(e)},set:function(n,i){var r=t(n).css("transit:transform");r.setFromString(e,i);t(n).css({"transit:transform":r})}}}function h(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})}function b(t,e){if(typeof t==="string"&&!t.match(/^[\-0-9\.]+$/)){return t}else{return""+t+e}}function y(e){var n=e;if(typeof n==="string"&&!n.match(/^[\-0-9\.]+/)){n=t.fx.speeds[n]||t.fx.speeds._default}return b(n,"ms")}t.transit.getTransitionValue=d;return t});
 !function(t){var i=t(window);t.fn.visible=function(t,e,o){if(!(this.length<1)){var r=this.length>1?this.eq(0):this,n=r.get(0),f=i.width(),h=i.height(),o=o?o:"both",l=e===!0?n.offsetWidth*n.offsetHeight:!0;if("function"==typeof n.getBoundingClientRect){var g=n.getBoundingClientRect(),u=g.top>=0&&g.top<h,s=g.bottom>0&&g.bottom<=h,c=g.left>=0&&g.left<f,a=g.right>0&&g.right<=f,v=t?u||s:u&&s,b=t?c||a:c&&a;if("both"===o)return l&&v&&b;if("vertical"===o)return l&&v;if("horizontal"===o)return l&&b}else{var d=i.scrollTop(),p=d+h,w=i.scrollLeft(),m=w+f,y=r.offset(),z=y.top,B=z+r.height(),C=y.left,R=C+r.width(),j=t===!0?B:z,q=t===!0?z:B,H=t===!0?R:C,L=t===!0?C:R;if("both"===o)return!!l&&p>=q&&j>=d&&m>=L&&H>=w;if("vertical"===o)return!!l&&p>=q&&j>=d;if("horizontal"===o)return!!l&&m>=L&&H>=w}}}}(jQuery);
 
+/*
+ * A speed-improved perlin and simplex noise algorithms for 2D.
+ *
+ * Based on example code by Stefan Gustavson (stegu@itn.liu.se).
+ * Optimisations by Peter Eastman (peastman@drizzle.stanford.edu).
+ * Better rank ordering method by Stefan Gustavson in 2012.
+ * Converted to Javascript by Joseph Gentle.
+ *
+ * Version 2012-03-09
+ *
+ * This code was placed in the public domain by its original author,
+ * Stefan Gustavson. You may use it as you see fit, but
+ * attribution is appreciated.
+ *
+ */
+
+(function(global){
+  var module = global.noise = {};
+
+  function Grad(x, y, z) {
+    this.x = x; this.y = y; this.z = z;
+  }
+  
+  Grad.prototype.dot2 = function(x, y) {
+    return this.x*x + this.y*y;
+  };
+
+  Grad.prototype.dot3 = function(x, y, z) {
+    return this.x*x + this.y*y + this.z*z;
+  };
+
+  var grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
+               new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),
+               new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)];
+
+  var p = [151,160,137,91,90,15,
+  131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
+  190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
+  88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
+  77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,
+  102,143,54, 65,25,63,161, 1,216,80,73,209,76,132,187,208, 89,18,169,200,196,
+  135,130,116,188,159,86,164,100,109,198,173,186, 3,64,52,217,226,250,124,123,
+  5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,
+  223,183,170,213,119,248,152, 2,44,154,163, 70,221,153,101,155,167, 43,172,9,
+  129,22,39,253, 19,98,108,110,79,113,224,232,178,185, 112,104,218,246,97,228,
+  251,34,242,193,238,210,144,12,191,179,162,241, 81,51,145,235,249,14,239,107,
+  49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
+  138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180];
+  // To remove the need for index wrapping, double the permutation table length
+  var perm = new Array(512);
+  var gradP = new Array(512);
+
+  // This isn't a very good seeding function, but it works ok. It supports 2^16
+  // different seed values. Write something better if you need more seeds.
+  module.seed = function(seed) {
+    if(seed > 0 && seed < 1) {
+      // Scale the seed out
+      seed *= 65536;
+    }
+
+    seed = Math.floor(seed);
+    if(seed < 256) {
+      seed |= seed << 8;
+    }
+
+    for(var i = 0; i < 256; i++) {
+      var v;
+      if (i & 1) {
+        v = p[i] ^ (seed & 255);
+      } else {
+        v = p[i] ^ ((seed>>8) & 255);
+      }
+
+      perm[i] = perm[i + 256] = v;
+      gradP[i] = gradP[i + 256] = grad3[v % 12];
+    }
+  };
+
+  module.seed(0);
+
+  /*
+  for(var i=0; i<256; i++) {
+    perm[i] = perm[i + 256] = p[i];
+    gradP[i] = gradP[i + 256] = grad3[perm[i] % 12];
+  }*/
+
+  // Skewing and unskewing factors for 2, 3, and 4 dimensions
+  var F2 = 0.5*(Math.sqrt(3)-1);
+  var G2 = (3-Math.sqrt(3))/6;
+
+  var F3 = 1/3;
+  var G3 = 1/6;
+
+  // 2D simplex noise
+  module.simplex2 = function(xin, yin) {
+    var n0, n1, n2; // Noise contributions from the three corners
+    // Skew the input space to determine which simplex cell we're in
+    var s = (xin+yin)*F2; // Hairy factor for 2D
+    var i = Math.floor(xin+s);
+    var j = Math.floor(yin+s);
+    var t = (i+j)*G2;
+    var x0 = xin-i+t; // The x,y distances from the cell origin, unskewed.
+    var y0 = yin-j+t;
+    // For the 2D case, the simplex shape is an equilateral triangle.
+    // Determine which simplex we are in.
+    var i1, j1; // Offsets for second (middle) corner of simplex in (i,j) coords
+    if(x0>y0) { // lower triangle, XY order: (0,0)->(1,0)->(1,1)
+      i1=1; j1=0;
+    } else {    // upper triangle, YX order: (0,0)->(0,1)->(1,1)
+      i1=0; j1=1;
+    }
+    // A step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and
+    // a step of (0,1) in (i,j) means a step of (-c,1-c) in (x,y), where
+    // c = (3-sqrt(3))/6
+    var x1 = x0 - i1 + G2; // Offsets for middle corner in (x,y) unskewed coords
+    var y1 = y0 - j1 + G2;
+    var x2 = x0 - 1 + 2 * G2; // Offsets for last corner in (x,y) unskewed coords
+    var y2 = y0 - 1 + 2 * G2;
+    // Work out the hashed gradient indices of the three simplex corners
+    i &= 255;
+    j &= 255;
+    var gi0 = gradP[i+perm[j]];
+    var gi1 = gradP[i+i1+perm[j+j1]];
+    var gi2 = gradP[i+1+perm[j+1]];
+    // Calculate the contribution from the three corners
+    var t0 = 0.5 - x0*x0-y0*y0;
+    if(t0<0) {
+      n0 = 0;
+    } else {
+      t0 *= t0;
+      n0 = t0 * t0 * gi0.dot2(x0, y0);  // (x,y) of grad3 used for 2D gradient
+    }
+    var t1 = 0.5 - x1*x1-y1*y1;
+    if(t1<0) {
+      n1 = 0;
+    } else {
+      t1 *= t1;
+      n1 = t1 * t1 * gi1.dot2(x1, y1);
+    }
+    var t2 = 0.5 - x2*x2-y2*y2;
+    if(t2<0) {
+      n2 = 0;
+    } else {
+      t2 *= t2;
+      n2 = t2 * t2 * gi2.dot2(x2, y2);
+    }
+    // Add contributions from each corner to get the final noise value.
+    // The result is scaled to return values in the interval [-1,1].
+    return 70 * (n0 + n1 + n2);
+  };
+
+  // 3D simplex noise
+  module.simplex3 = function(xin, yin, zin) {
+    var n0, n1, n2, n3; // Noise contributions from the four corners
+
+    // Skew the input space to determine which simplex cell we're in
+    var s = (xin+yin+zin)*F3; // Hairy factor for 2D
+    var i = Math.floor(xin+s);
+    var j = Math.floor(yin+s);
+    var k = Math.floor(zin+s);
+
+    var t = (i+j+k)*G3;
+    var x0 = xin-i+t; // The x,y distances from the cell origin, unskewed.
+    var y0 = yin-j+t;
+    var z0 = zin-k+t;
+
+    // For the 3D case, the simplex shape is a slightly irregular tetrahedron.
+    // Determine which simplex we are in.
+    var i1, j1, k1; // Offsets for second corner of simplex in (i,j,k) coords
+    var i2, j2, k2; // Offsets for third corner of simplex in (i,j,k) coords
+    if(x0 >= y0) {
+      if(y0 >= z0)      { i1=1; j1=0; k1=0; i2=1; j2=1; k2=0; }
+      else if(x0 >= z0) { i1=1; j1=0; k1=0; i2=1; j2=0; k2=1; }
+      else              { i1=0; j1=0; k1=1; i2=1; j2=0; k2=1; }
+    } else {
+      if(y0 < z0)      { i1=0; j1=0; k1=1; i2=0; j2=1; k2=1; }
+      else if(x0 < z0) { i1=0; j1=1; k1=0; i2=0; j2=1; k2=1; }
+      else             { i1=0; j1=1; k1=0; i2=1; j2=1; k2=0; }
+    }
+    // A step of (1,0,0) in (i,j,k) means a step of (1-c,-c,-c) in (x,y,z),
+    // a step of (0,1,0) in (i,j,k) means a step of (-c,1-c,-c) in (x,y,z), and
+    // a step of (0,0,1) in (i,j,k) means a step of (-c,-c,1-c) in (x,y,z), where
+    // c = 1/6.
+    var x1 = x0 - i1 + G3; // Offsets for second corner
+    var y1 = y0 - j1 + G3;
+    var z1 = z0 - k1 + G3;
+
+    var x2 = x0 - i2 + 2 * G3; // Offsets for third corner
+    var y2 = y0 - j2 + 2 * G3;
+    var z2 = z0 - k2 + 2 * G3;
+
+    var x3 = x0 - 1 + 3 * G3; // Offsets for fourth corner
+    var y3 = y0 - 1 + 3 * G3;
+    var z3 = z0 - 1 + 3 * G3;
+
+    // Work out the hashed gradient indices of the four simplex corners
+    i &= 255;
+    j &= 255;
+    k &= 255;
+    var gi0 = gradP[i+   perm[j+   perm[k   ]]];
+    var gi1 = gradP[i+i1+perm[j+j1+perm[k+k1]]];
+    var gi2 = gradP[i+i2+perm[j+j2+perm[k+k2]]];
+    var gi3 = gradP[i+ 1+perm[j+ 1+perm[k+ 1]]];
+
+    // Calculate the contribution from the four corners
+    var t0 = 0.6 - x0*x0 - y0*y0 - z0*z0;
+    if(t0<0) {
+      n0 = 0;
+    } else {
+      t0 *= t0;
+      n0 = t0 * t0 * gi0.dot3(x0, y0, z0);  // (x,y) of grad3 used for 2D gradient
+    }
+    var t1 = 0.6 - x1*x1 - y1*y1 - z1*z1;
+    if(t1<0) {
+      n1 = 0;
+    } else {
+      t1 *= t1;
+      n1 = t1 * t1 * gi1.dot3(x1, y1, z1);
+    }
+    var t2 = 0.6 - x2*x2 - y2*y2 - z2*z2;
+    if(t2<0) {
+      n2 = 0;
+    } else {
+      t2 *= t2;
+      n2 = t2 * t2 * gi2.dot3(x2, y2, z2);
+    }
+    var t3 = 0.6 - x3*x3 - y3*y3 - z3*z3;
+    if(t3<0) {
+      n3 = 0;
+    } else {
+      t3 *= t3;
+      n3 = t3 * t3 * gi3.dot3(x3, y3, z3);
+    }
+    // Add contributions from each corner to get the final noise value.
+    // The result is scaled to return values in the interval [-1,1].
+    return 32 * (n0 + n1 + n2 + n3);
+
+  };
+
+  // ##### Perlin noise stuff
+
+  function fade(t) {
+    return t*t*t*(t*(t*6-15)+10);
+  }
+
+  function lerp(a, b, t) {
+    return (1-t)*a + t*b;
+  }
+
+  // 2D Perlin Noise
+  module.perlin2 = function(x, y) {
+    // Find unit grid cell containing point
+    var X = Math.floor(x), Y = Math.floor(y);
+    // Get relative xy coordinates of point within that cell
+    x = x - X; y = y - Y;
+    // Wrap the integer cells at 255 (smaller integer period can be introduced here)
+    X = X & 255; Y = Y & 255;
+
+    // Calculate noise contributions from each of the four corners
+    var n00 = gradP[X+perm[Y]].dot2(x, y);
+    var n01 = gradP[X+perm[Y+1]].dot2(x, y-1);
+    var n10 = gradP[X+1+perm[Y]].dot2(x-1, y);
+    var n11 = gradP[X+1+perm[Y+1]].dot2(x-1, y-1);
+
+    // Compute the fade curve value for x
+    var u = fade(x);
+
+    // Interpolate the four results
+    return lerp(
+        lerp(n00, n10, u),
+        lerp(n01, n11, u),
+       fade(y));
+  };
+
+  // 3D Perlin Noise
+  module.perlin3 = function(x, y, z) {
+    // Find unit grid cell containing point
+    var X = Math.floor(x), Y = Math.floor(y), Z = Math.floor(z);
+    // Get relative xyz coordinates of point within that cell
+    x = x - X; y = y - Y; z = z - Z;
+    // Wrap the integer cells at 255 (smaller integer period can be introduced here)
+    X = X & 255; Y = Y & 255; Z = Z & 255;
+
+    // Calculate noise contributions from each of the eight corners
+    var n000 = gradP[X+  perm[Y+  perm[Z  ]]].dot3(x,   y,     z);
+    var n001 = gradP[X+  perm[Y+  perm[Z+1]]].dot3(x,   y,   z-1);
+    var n010 = gradP[X+  perm[Y+1+perm[Z  ]]].dot3(x,   y-1,   z);
+    var n011 = gradP[X+  perm[Y+1+perm[Z+1]]].dot3(x,   y-1, z-1);
+    var n100 = gradP[X+1+perm[Y+  perm[Z  ]]].dot3(x-1,   y,   z);
+    var n101 = gradP[X+1+perm[Y+  perm[Z+1]]].dot3(x-1,   y, z-1);
+    var n110 = gradP[X+1+perm[Y+1+perm[Z  ]]].dot3(x-1, y-1,   z);
+    var n111 = gradP[X+1+perm[Y+1+perm[Z+1]]].dot3(x-1, y-1, z-1);
+
+    // Compute the fade curve value for x, y, z
+    var u = fade(x);
+    var v = fade(y);
+    var w = fade(z);
+
+    // Interpolate
+    return lerp(
+        lerp(
+          lerp(n000, n100, u),
+          lerp(n001, n101, u), w),
+        lerp(
+          lerp(n010, n110, u),
+          lerp(n011, n111, u), w),
+       v);
+  };
+
+})(this);
+
 /*! @vimeo/player v2.1.0 | (c) 2017 Vimeo | MIT License | https://github.com/vimeo/player.js */
 !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e.Vimeo=e.Vimeo||{},e.Vimeo.Player=t())}(this,function(){"use strict";function e(e,t){return t={exports:{}},e(t,t.exports),t.exports}function t(e,t,n){var r=_.get(e.element)||{};t in r||(r[t]=[]),r[t].push(n),_.set(e.element,r)}function n(e,t){var n=_.get(e.element)||{};return n[t]||[]}function r(e,t,n){var r=_.get(e.element)||{};if(!r[t])return!0;if(!n)return r[t]=[],_.set(e.element,r),!0;var o=r[t].indexOf(n);return o!==-1&&r[t].splice(o,1),_.set(e.element,r),r[t]&&0===r[t].length}function o(e,t){var o=n(e,t);if(o.length<1)return!1;var i=o.shift();return r(e,t,i),i}function i(e,t){var n=_.get(e);_.set(t,n),_.delete(e)}function a(e,t){return 0===e.indexOf(t.toLowerCase())?e:""+t.toLowerCase()+e.substr(0,1).toUpperCase()+e.substr(1)}function u(e){return e instanceof window.HTMLElement}function s(e){return!isNaN(parseFloat(e))&&isFinite(e)&&Math.floor(e)==e}function c(e){return/^(https?:)?\/\/((player|www).)?vimeo.com(?=$|\/)/.test(e)}function f(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.id,n=e.url,r=t||n;if(!r)throw new Error("An id or url must be passed, either in an options object or as a data-vimeo-id or data-vimeo-url attribute.");if(s(r))return"https://vimeo.com/"+r;if(c(r))return r.replace("http:","https:");if(t)throw new TypeError("“"+t+"” is not a valid video id.");throw new TypeError("“"+r+"” is not a vimeo.com url.")}function l(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return j.reduce(function(t,n){var r=e.getAttribute("data-vimeo-"+n);return(r||""===r)&&(t[n]=""===r?1:r),t},t)}function h(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return new Promise(function(n,r){if(!c(e))throw new TypeError("“"+e+"” is not a vimeo.com url.");var o="https://vimeo.com/api/oembed.json?url="+encodeURIComponent(e);for(var i in t)t.hasOwnProperty(i)&&(o+="&"+i+"="+encodeURIComponent(t[i]));var a="XDomainRequest"in window?new XDomainRequest:new XMLHttpRequest;a.open("GET",o,!0),a.onload=function(){if(404===a.status)return void r(new Error("“"+e+"” was not found."));if(403===a.status)return void r(new Error("“"+e+"” is not embeddable."));try{var t=JSON.parse(a.responseText);n(t)}catch(e){r(e)}},a.onerror=function(){var e=a.status?" ("+a.status+")":"";r(new Error("There was an error fetching the embed code from Vimeo"+e+"."))},a.send()})}function d(e,t){var n=e.html;if(!t)throw new TypeError("An element must be provided");if(null!==t.getAttribute("data-vimeo-initialized"))return t.querySelector("iframe");var r=document.createElement("div");return r.innerHTML=n,t.appendChild(r.firstChild),t.setAttribute("data-vimeo-initialized","true"),t.querySelector("iframe")}function v(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:document,t=[].slice.call(e.querySelectorAll("[data-vimeo-id], [data-vimeo-url]")),n=function(e){"console"in window&&console.error&&console.error("There was an error creating an embed: "+e)};t.forEach(function(e){try{if(null!==e.getAttribute("data-vimeo-defer"))return;var t=l(e),r=f(t);h(r,t).then(function(t){return d(t,e)}).catch(n)}catch(e){n(e)}})}function p(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:document,t=function(t){if(c(t.origin)&&t.data&&"spacechange"===t.data.event)for(var n=e.querySelectorAll("iframe"),r=0;r<n.length;r++)if(n[r].contentWindow===t.source){var o=n[r].parentElement;o&&o.className.indexOf("vimeo-space")!==-1&&(o.style.paddingBottom=t.data.data[0].bottom+"px");break}};window.addEventListener?window.addEventListener("message",t,!1):window.attachEvent&&window.attachEvent("onmessage",t)}function y(e){return"string"==typeof e&&(e=JSON.parse(e)),e}function m(e,t,n){if(e.element.contentWindow&&e.element.contentWindow.postMessage){var r={method:t};void 0!==n&&(r.value=n);var o=parseFloat(navigator.userAgent.toLowerCase().replace(/^.*msie (\d+).*$/,"$1"));o>=8&&o<10&&(r=JSON.stringify(r)),e.element.contentWindow.postMessage(r,e.origin)}}function g(e,t){t=y(t);var i=[],a=void 0;if(t.event){if("error"===t.event){var u=n(e,t.data.method);u.forEach(function(n){var o=new Error(t.data.message);o.name=t.data.name,n.reject(o),r(e,t.data.method,n)})}i=n(e,"event:"+t.event),a=t.data}else if(t.method){var s=o(e,t.method);s&&(i.push(s),a=t.value)}i.forEach(function(t){try{if("function"==typeof t)return void t.call(e,a);t.resolve(a)}catch(e){}})}function w(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var k="undefined"!=typeof Array.prototype.indexOf,b="undefined"!=typeof window.postMessage;if(!k||!b)throw new Error("Sorry, the Vimeo Player API is not available in this browser.");var E="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},T=(e(function(e,t){!function(e){function t(e,t){function r(e){return this&&this.constructor===r?(this._keys=[],this._values=[],this._itp=[],this.objectOnly=t,void(e&&n.call(this,e))):new r(e)}return t||w(e,"size",{get:y}),e.constructor=r,r.prototype=e,r}function n(e){this.add?e.forEach(this.add,this):e.forEach(function(e){this.set(e[0],e[1])},this)}function r(e){return this.has(e)&&(this._keys.splice(g,1),this._values.splice(g,1),this._itp.forEach(function(e){g<e[0]&&e[0]--})),-1<g}function o(e){return this.has(e)?this._values[g]:void 0}function i(e,t){if(this.objectOnly&&t!==Object(t))throw new TypeError("Invalid value used as weak collection key");if(t!=t||0===t)for(g=e.length;g--&&!k(e[g],t););else g=e.indexOf(t);return-1<g}function a(e){return i.call(this,this._values,e)}function u(e){return i.call(this,this._keys,e)}function s(e,t){return this.has(e)?this._values[g]=t:this._values[this._keys.push(e)-1]=t,this}function c(e){return this.has(e)||this._values.push(e),this}function f(){(this._keys||0).length=this._values.length=0}function l(){return p(this._itp,this._keys)}function h(){return p(this._itp,this._values)}function d(){return p(this._itp,this._keys,this._values)}function v(){return p(this._itp,this._values,this._values)}function p(e,t,n){var r=[0],o=!1;return e.push(r),{next:function(){var i,a=r[0];return!o&&a<t.length?(i=n?[t[a],n[a]]:t[a],r[0]++):(o=!0,e.splice(e.indexOf(r),1)),{done:o,value:i}}}}function y(){return this._values.length}function m(e,t){for(var n=this.entries();;){var r=n.next();if(r.done)break;e.call(t,r.value[1],r.value[0],this)}}var g,w=Object.defineProperty,k=function(e,t){return e===t||e!==e&&t!==t};"undefined"==typeof WeakMap&&(e.WeakMap=t({delete:r,clear:f,get:o,has:u,set:s},!0)),"undefined"!=typeof Map&&"function"==typeof(new Map).values&&(new Map).values().next||(e.Map=t({delete:r,has:u,get:o,set:s,keys:l,values:h,entries:d,forEach:m,clear:f})),"undefined"!=typeof Set&&"function"==typeof(new Set).values&&(new Set).values().next||(e.Set=t({has:a,add:c,delete:r,clear:f,keys:h,values:h,entries:v,forEach:m})),"undefined"==typeof WeakSet&&(e.WeakSet=t({delete:r,add:c,clear:f,has:a},!0))}("undefined"!=typeof E?E:window)}),e(function(e){var t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(t,n,r){n[t]=n[t]||r(),e.exports&&(e.exports=n[t])}("Promise","undefined"!=typeof E?E:E,function(){function e(e,t){d.add(e,t),h||(h=p(d.drain))}function n(e){var n,r="undefined"==typeof e?"undefined":t(e);return null==e||"object"!=r&&"function"!=r||(n=e.then),"function"==typeof n&&n}function r(){for(var e=0;e<this.chain.length;e++)o(this,1===this.state?this.chain[e].success:this.chain[e].failure,this.chain[e]);this.chain.length=0}function o(e,t,r){var o,i;try{t===!1?r.reject(e.msg):(o=t===!0?e.msg:t.call(void 0,e.msg),o===r.promise?r.reject(TypeError("Promise-chain cycle")):(i=n(o))?i.call(o,r.resolve,r.reject):r.resolve(o))}catch(e){r.reject(e)}}function i(t){var o,u=this;if(!u.triggered){u.triggered=!0,u.def&&(u=u.def);try{(o=n(t))?e(function(){var e=new s(u);try{o.call(t,function(){i.apply(e,arguments)},function(){a.apply(e,arguments)})}catch(t){a.call(e,t)}}):(u.msg=t,u.state=1,u.chain.length>0&&e(r,u))}catch(e){a.call(new s(u),e)}}}function a(t){var n=this;n.triggered||(n.triggered=!0,n.def&&(n=n.def),n.msg=t,n.state=2,n.chain.length>0&&e(r,n))}function u(e,t,n,r){for(var o=0;o<t.length;o++)!function(o){e.resolve(t[o]).then(function(e){n(o,e)},r)}(o)}function s(e){this.def=e,this.triggered=!1}function c(e){this.promise=e,this.state=0,this.triggered=!1,this.chain=[],this.msg=void 0}function f(t){if("function"!=typeof t)throw TypeError("Not a function");if(0!==this.__NPO__)throw TypeError("Not a promise");this.__NPO__=1;var n=new c(this);this.then=function(t,o){var i={success:"function"!=typeof t||t,failure:"function"==typeof o&&o};return i.promise=new this.constructor(function(e,t){if("function"!=typeof e||"function"!=typeof t)throw TypeError("Not a function");i.resolve=e,i.reject=t}),n.chain.push(i),0!==n.state&&e(r,n),i.promise},this.catch=function(e){return this.then(void 0,e)};try{t.call(void 0,function(e){i.call(n,e)},function(e){a.call(n,e)})}catch(e){a.call(n,e)}}var l,h,d,v=Object.prototype.toString,p="undefined"!=typeof setImmediate?function(e){return setImmediate(e)}:setTimeout;try{Object.defineProperty({},"x",{}),l=function(e,t,n,r){return Object.defineProperty(e,t,{value:n,writable:!0,configurable:r!==!1})}}catch(e){l=function(e,t,n){return e[t]=n,e}}d=function(){function e(e,t){this.fn=e,this.self=t,this.next=void 0}var t,n,r;return{add:function(o,i){r=new e(o,i),n?n.next=r:t=r,n=r,r=void 0},drain:function(){var e=t;for(t=n=h=void 0;e;)e.fn.call(e.self),e=e.next}}}();var y=l({},"constructor",f,!1);return f.prototype=y,l(y,"__NPO__",0,!1),l(f,"resolve",function(e){var n=this;return e&&"object"==("undefined"==typeof e?"undefined":t(e))&&1===e.__NPO__?e:new n(function(t,n){if("function"!=typeof t||"function"!=typeof n)throw TypeError("Not a function");t(e)})}),l(f,"reject",function(e){return new this(function(t,n){if("function"!=typeof t||"function"!=typeof n)throw TypeError("Not a function");n(e)})}),l(f,"all",function(e){var t=this;return"[object Array]"!=v.call(e)?t.reject(TypeError("Not an array")):0===e.length?t.resolve([]):new t(function(n,r){if("function"!=typeof n||"function"!=typeof r)throw TypeError("Not a function");var o=e.length,i=Array(o),a=0;u(t,e,function(e,t){i[e]=t,++a===o&&n(i)},r)})}),l(f,"race",function(e){var t=this;return"[object Array]"!=v.call(e)?t.reject(TypeError("Not an array")):new t(function(n,r){if("function"!=typeof n||"function"!=typeof r)throw TypeError("Not a function");u(t,e,function(e,t){n(t)},r)})}),f})})),_=new WeakMap,j=["id","url","width","maxwidth","height","maxheight","portrait","title","byline","color","autoplay","autopause","loop","responsive"],x=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),M=new WeakMap,A=new WeakMap,Player=function(){function Player(e){var t=this,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};if(w(this,Player),window.jQuery&&e instanceof jQuery&&(e.length>1&&window.console&&console.warn&&console.warn("A jQuery object with multiple elements was passed, using the first element."),e=e[0]),"string"==typeof e&&(e=document.getElementById(e)),!u(e))throw new TypeError("You must pass either a valid element or a valid id.");if("IFRAME"!==e.nodeName){var r=e.querySelector("iframe");r&&(e=r)}if("IFRAME"===e.nodeName&&!c(e.getAttribute("src")||""))throw new Error("The player element passed isn’t a Vimeo embed.");if(M.has(e))return M.get(e);this.element=e,this.origin="*";var o=new T(function(r,o){var a=function(e){if(c(e.origin)&&t.element.contentWindow===e.source){"*"===t.origin&&(t.origin=e.origin);var n=y(e.data),o="event"in n&&"ready"===n.event,i="method"in n&&"ping"===n.method;return o||i?(t.element.setAttribute("data-ready","true"),void r()):void g(t,n)}};if(window.addEventListener?window.addEventListener("message",a,!1):window.attachEvent&&window.attachEvent("onmessage",a),"IFRAME"!==t.element.nodeName){var u=l(e,n),s=f(u);h(s,u).then(function(n){var r=d(n,e);return t.element=r,i(e,r),M.set(t.element,t),n}).catch(function(e){return o(e)})}});return A.set(this,o),M.set(this.element,this),"IFRAME"===this.element.nodeName&&m(this,"ping"),this}return x(Player,[{key:"callMethod",value:function(e){var n=this,r=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return new T(function(o,i){return n.ready().then(function(){t(n,e,{resolve:o,reject:i}),m(n,e,r)})})}},{key:"get",value:function(e){var n=this;return new T(function(r,o){return e=a(e,"get"),n.ready().then(function(){t(n,e,{resolve:r,reject:o}),m(n,e)})})}},{key:"set",value:function(e,n){var r=this;return T.resolve(n).then(function(n){if(e=a(e,"set"),void 0===n||null===n)throw new TypeError("There must be a value to set.");return r.ready().then(function(){return new T(function(o,i){t(r,e,{resolve:o,reject:i}),m(r,e,n)})})})}},{key:"on",value:function(e,r){if(!e)throw new TypeError("You must pass an event name.");if(!r)throw new TypeError("You must pass a callback function.");if("function"!=typeof r)throw new TypeError("The callback must be a function.");var o=n(this,"event:"+e);0===o.length&&this.callMethod("addEventListener",e).catch(function(){}),t(this,"event:"+e,r)}},{key:"off",value:function(e,t){if(!e)throw new TypeError("You must pass an event name.");if(t&&"function"!=typeof t)throw new TypeError("The callback must be a function.");var n=r(this,"event:"+e,t);n&&this.callMethod("removeEventListener",e).catch(function(e){})}},{key:"loadVideo",value:function(e){return this.callMethod("loadVideo",e)}},{key:"ready",value:function(){var e=A.get(this);return T.resolve(e)}},{key:"addCuePoint",value:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return this.callMethod("addCuePoint",{time:e,data:t})}},{key:"removeCuePoint",value:function(e){return this.callMethod("removeCuePoint",e)}},{key:"enableTextTrack",value:function(e,t){if(!e)throw new TypeError("You must pass a language.");return this.callMethod("enableTextTrack",{language:e,kind:t})}},{key:"disableTextTrack",value:function(){return this.callMethod("disableTextTrack")}},{key:"pause",value:function(){return this.callMethod("pause")}},{key:"play",value:function(){return this.callMethod("play")}},{key:"unload",value:function(){return this.callMethod("unload")}},{key:"getAutopause",value:function(){return this.get("autopause")}},{key:"setAutopause",value:function(e){return this.set("autopause",e)}},{key:"getColor",value:function(){return this.get("color")}},{key:"setColor",value:function(e){return this.set("color",e)}},{key:"getCuePoints",value:function(){return this.get("cuePoints")}},{key:"getCurrentTime",value:function(){return this.get("currentTime")}},{key:"setCurrentTime",value:function(e){return this.set("currentTime",e)}},{key:"getDuration",value:function(){return this.get("duration")}},{key:"getEnded",value:function(){return this.get("ended")}},{key:"getLoop",value:function(){return this.get("loop")}},{key:"setLoop",value:function(e){return this.set("loop",e)}},{key:"getPaused",value:function(){return this.get("paused")}},{key:"getTextTracks",value:function(){return this.get("textTracks")}},{key:"getVideoEmbedCode",value:function(){return this.get("videoEmbedCode")}},{key:"getVideoId",value:function(){return this.get("videoId")}},{key:"getVideoTitle",value:function(){return this.get("videoTitle")}},{key:"getVideoWidth",value:function(){return this.get("videoWidth")}},{key:"getVideoHeight",value:function(){return this.get("videoHeight")}},{key:"getVideoUrl",value:function(){return this.get("videoUrl")}},{key:"getVolume",value:function(){return this.get("volume")}},{key:"setVolume",value:function(e){return this.set("volume",e)}}]),Player}();return v(),p(),Player});
 
@@ -388,22 +699,9 @@ App.interlace = function(options) {
   options = options || {};
 
   var $container           = options.el;
-  var myintervals          = [];
-  var intIndex             = 0;
-  var shiftVals            = [];
-  var processShiftsOrig    = [];
-  var processShifts        = [];
-  var shiftFactor          = 1;
-  var toFromChaosDirection = 'to';
-  var mouseIdle            = 200;
-  var idleTime             = 0;
-  var genSpot              = randomZeroMouseSpot();
   var $cloneWrapper;
   var $clones;
   var $cloneItems;
-  var finishedMouseIntervention = false;
-  var stopAnimating = false;
-  var previousShiftMode;
 
   // params
   var $original      = $container.find('.interlace-item'); // original that's hidden on the page
@@ -411,72 +709,49 @@ App.interlace = function(options) {
   var lineHeight     = parseInt( $original.css('line-height') ); // change in css
   var fontHeight     = $original.height() * lineHeight / fontSize; // height of the type container
   var originalHeight = $original.outerHeight( true ); // height of the type container
+  var prevMouseX     = 0;
+  var prevMouseY     = 0;
+  var a              = 0;
+  var inc            = (Math.PI*2)/200.0;
+  var mouseY         = $(window).height()/3;
+  var slices = [];
+
 
   // The number of times an interlaced element is divided into separate cells.
   // A lower slice ratio results in more cells.
-  // var sliceRatio = 4.2;
-  // var sliceRatio = App.windowWidth / fontSize;
   var sliceRatio = fontSize / 12;
-  // console.log('sliceRatio', sliceRatio);
 
   var sliceNum       = Math.round( originalHeight / sliceRatio ); // number of slices
   var sliceHeight    = Math.ceil( fontHeight / sliceNum ); // round up to have whole px, FIX flicker
-  var intervalTime   = 1000; // time for each shift
+  // var intervalTime   = 1000; // time for each shift
 
-  var maxShift       = 20; // percentage to calculate shift in px
+  var maxShift       = 0; // percentage to calculate shift in px
   var minShift       = -maxShift; // percentage to calculate shift in px
   var minShiftPx     = fontSize * minShift / 100; // calculate shift in px based on font size
   var maxShiftPx     = fontSize * maxShift / 100; // calculate shift in px based on font size
-  var mode           = 'toFromChaos';
+  var baseShift      = 0;
+  var influence      = 0.0;
+  var noiseYOff      = 0.0;
+
 
   // helper functions
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function toFromChaos(elIndex, intervalIndex, stopThresh) {
-    var steps = shiftVals[elIndex].steps;
-      // overshoot, so shift is not just going in one direction towards 0
-    var shift = easeOutBack( intervalIndex / steps, 0, 1, 1 );
-    var actualShift = Math.floor( shiftVals[elIndex].px / shift );
-
-    if ( Math.abs( actualShift ) < maxShiftPx * stopThresh ) {
-      actualShift = 0;
-    }
-
-    processShifts[elIndex] = actualShift;
-
-    if (toFromChaosDirection === 'to') {
-      return shiftVals[elIndex].px - actualShift;
-    } else {
-      return actualShift;
-    }
-  }
-
-
-  function easeOutBack(t, b, c, d) {
-    var ts = (t /= d) * t;
-    var tc = ts * t;
-
-    return b + c * ( 4 * tc + -9 * ts + 6 * t );
-  }
-
   Number.prototype.map = function(in_min, in_max, out_min, out_max) {
     return ( this - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;
   };
 
-  function onlyUnique(value, index, self) {
-    return self.indexOf( value ) === index;
+  function dist(x1, y1, x2, y2){
+    var a = x1 - x2;
+    var b = y1 - y2;
+    var c = Math.sqrt( a*a + b*b );
+    return c;
   }
-
 
   // start
   function createDivs() {
+    noise.seed(Math.random());
+
     var typeOriginal = $original.html();
 
-    makeNewShiftVals();
     $container.find('.interlace-clone-wrapper').remove();
     $container.append('<div class="interlace-clone-wrapper"></div>');
 
@@ -491,189 +766,26 @@ App.interlace = function(options) {
     $clones = $cloneWrapper.find('.interlace-clone');
     $cloneItems = $cloneWrapper.find('.interlace-clone__content');
 
-    sliceDivs( startInterval );
+    // sliceDivs( startInterval );
+    sliceDivs();
   }
 
-  function makeNewShiftVals() {
-    // Don't repeat shift modes
-    var shiftModes = ['random', 'asc', 'desc'];
-    var uniqueShiftModes = shiftModes;
-    var shiftMode = shiftModes[ Math.floor( Math.random() * shiftModes.length ) ];
-    var leftOrRightSeed = Math.random();
 
-    if ( shiftMode == previousShiftMode ) {
-      var index = shiftModes.indexOf( shiftMode );
-      if (index > -1) {
-        uniqueShiftModes.splice( index, 1 );
-      }
-      shiftMode = uniqueShiftModes[ Math.floor( Math.random() * uniqueShiftModes.length ) ];
-    }
-    previousShiftMode = shiftMode;
-
-    // Override shiftMode and set to always random for now.
-    shiftMode = 'random';
-
-    shiftVals = [];
-
-    for ( var i = 0; i < sliceNum; i++ ) {
-      shiftVals[i] = {};
-      var leftOrRight = getLeftOrRightVal(leftOrRightSeed, i);
-      // setup the shift values
-      if ( shiftMode == 'random' ) {
-        shiftVals[i].px = maxShiftPx * leftOrRight;
-      } else if ( shiftMode == 'asc' ) {
-        shiftVals[i].px = Math.round( ( maxShiftPx / sliceNum ) * (i + 1) ) * leftOrRight;
-      } else if ( shiftMode == 'desc' ) {
-        shiftVals[i].px = ( maxShiftPx - Math.round( ( maxShiftPx / sliceNum ) * (i + 1) ) ) * leftOrRight;
-      }
-
-      shiftVals[i].steps = getRandomInt(1, 4); // the more steps the longer the animation takes
-      processShiftsOrig[i] = shiftVals[i].px;
-    }
-  }
-
-  function getLeftOrRightVal(seed, i) {
-    // getLeftOrRightVal determines which shift method to use for
-    // this animation.
-
-    var choices = 3;
-
-    if ( seed < 1 / choices ) {
-      // random
-      // console.log('shift method', 'random');
-      leftOrRight = ( Math.random() < 0.5 ) ? -1 : 1;
-    } else if ( seed < 2 / choices ) {
-      // all in one direction
-      // console.log('shift method', 'all in one direction');
-      leftOrRight = seed < 0.5 ? -1 : 1;
-    } else {
-      // alternating left, then right
-      // console.log('shift method', 'alternating left, then right');
-      leftOrRight = ( i % 2 === 0 ) ? -1 : 1;
-    }
-
-    return leftOrRight;
-  }
-
-  function sliceDivs(startInt) {
+  // This is where we kick everything off
+   function sliceDivs(startInt) {
     // change height according to number of slices
     $clones.css( 'height', sliceHeight + 'px' );
+    // if ( startInt ) startInt();
 
-    if ( startInt ) startInt();
-  }
-
-  function moveDivs() {
-    var moveDivCompletions = 0;
-
-    if ( mode != 'mouse' ) {
-      intIndex++;
-      $cloneItems.data('mouseInterventionComplete', false);
-    }
-
-    for ( var i = 0; i < sliceNum; i++ ) {
+  // save all slices in an array so we don't have to use find() anymore
+ for ( var i = 0; i < sliceNum; i++ ) {
       var $item = $clones.eq( i ).find('.interlace-clone__content');
-      var leftShift = getRandomInt( minShiftPx, maxShiftPx ) + 'px'; // default, just random shifting
-      var easing = 'easeOutQuad';
-      var animDuration = getRandomInt( intervalTime / 4, intervalTime / 2 );
-
-      switch (mode) {
-      case 'toFromChaos':
-        leftShift = toFromChaos(i, intIndex, 0.2);
-        break;
-      case 'mouse':
-        leftShift = shiftVals[i].px * shiftFactor;
-        easing = 'easeInCirc';
-        break;
-      }
-
-      var css = {
-        // move text/img, so it visually stays in same place
-        left: leftShift + 'px'
-      };
-
-      if (mode == 'mouse') {
-        if ( $item.data('mouseInterventionComplete') ) {
-          $item.animate(css, 1, easing, mouseAnimationComplete( $item ));
-        } else {
-          $item.stop(true).animate(css, animDuration, easing, mouseAnimationComplete( $item ));
-        }
-      } else {
-        // delay random so every slice starts at a different time
-        $item.data('mouseInterventionComplete', false);
-        $item.delay(getRandomInt(100, 800)).velocity(css, animDuration, easing);
-      }
+      slices.push($item);
     }
-
-    var uniqueShifts = processShifts.filter( onlyUnique );
-
-    if ( uniqueShifts.length == 1 && intIndex > 1 ) {
-      // shifts are all 0
-      if ( toFromChaosDirection == 'to' ) {
-        // go to other direction
-        startInterval( 'from' );
-      } else {
-        // reset
-        makeNewShiftVals();
-        startInterval( 'to' );
-      }
-    }
-
-    function mouseAnimationComplete($item) {
-      $item.data('mouseInterventionComplete', true);
-    }
+    startAnimating(20);
   }
 
-  function startInterval(direction) {
-    stopInterval();
-    intIndex = 0;
-    toFromChaosDirection = direction !== undefined ? direction : toFromChaosDirection;
-    processShifts = processShiftsOrig; // hack so uniqueshifts != 1
-    var newInterval = setInterval(moveDivs, intervalTime);
-    myintervals.push(newInterval);
-  }
-
-  function stopInterval() {
-    for ( var i = 0; i < myintervals.length; i++ ) {
-      clearInterval(myintervals[i]);
-      myintervals.splice(i, 1);
-    }
-  }
-
-  function randomZeroMouseSpot() {
-    var w = window.innerWidth;
-    // var l = Math.floor( Math.random() * w * 0.5 );
-    // var r = Math.floor( Math.random() * w * 0.5 );
-    var l = 0;
-    var r = 1;
-    // console.log(0 + l, w - r);
-    return [l, r];
-  }
-
-  function timerIncrement() {
-    idleTime++;
-
-    if ( idleTime > 1 ) {
-      mode = 'toFromChaos';
-      finishedMouseIntervention = false;
-    }
-
-    if ( idleTime > 1 && idleTime < 2 ) {
-      if ( Math.abs( shiftFactor ) > 0.3 ) {
-        intIndex = 0;
-        toFromChaosDirection = 'from';
-      } else {
-        intIndex = 0;
-        toFromChaosDirection = 'to';
-      }
-      genSpot = randomZeroMouseSpot();
-    }
-  }
-
-  function listeners() {
-    startAnimating(mouseIdle);
-
-    // https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
-    var fps, fpsInterval, startTime, now, then, elapsed;
+   var fps, fpsInterval, startTime, now, then, elapsed;
 
     function startAnimating(fps) {
       fpsInterval = fps;
@@ -683,41 +795,49 @@ App.interlace = function(options) {
     }
 
     function animate() {
-      if ( stopAnimating ) return;
+      // if ( stopAnimating ) return;
       requestAnimationFrame( animate );
       now = Date.now();
       elapsed = now - then;
       if (elapsed > fpsInterval) {
         // console.log('animation frame');
         then = now - (elapsed % fpsInterval);
-        timerIncrement();
+        // timerIncrement();
+        loop();
       }
     }
 
-    // $(window).mousemove(function(e) {
-    //   // Stop all running animations when mouse movement starts
-    //   // $clones.find('.interlace-clone__content').finish();
-    //   idleTime = 0;
-    //   mode = 'mouse';
-    //   moveDivs();
-    //   var w = window.innerWidth;
-    //   // mapping 0,window.innerWidth to -1, 1
-    //   // so 0 is the center of the page
-    //   // that's when there will be no shift in the slices
-    //   // shiftFactor = e.clientX.map(0, w, -1, 1);
-    //   // modify so that 0 sweet spot is somewhere else
-    //   var mouseMapped = e.clientX.map(0 + genSpot[0], w - genSpot[1], -1, 1);
-    //   if (mouseMapped < -1.5) {
-    //     shiftFactor = -1.5;
-    //   } else if (mouseMapped > 1.5) {
-    //     shiftFactor = 1.5;
-    //   } else {
-    //     shiftFactor = mouseMapped;
-    //   }
-    // });
-  }
 
-  listeners();
+// Main animation loop
+function loop(){
+  var noiseXOff = 0.0;
+
+ for ( var i = 0; i < slices.length; i++ ) {
+      var leftShift = noise.simplex2(noiseYOff, noiseXOff).map(-1, 1,minShiftPx, maxShiftPx);
+      slices[i].css("left", leftShift + 'px');
+      noiseXOff +=0.08;
+ }
+  noiseYOff+=0.01;
+
+  // influence grows over time, so it starts with clean type
+  if(influence<=1.0)influence+=0.002;
+
+  // var mouseMapped = mouseY.map(0, $(window).height(), 20, 200);
+  var mouseMapped = mouseY.map(0, $(window).height(), 20, 200);
+  baseShift = mouseMapped*influence;
+
+    maxShift = baseShift+ Math.sin(a)*(50*influence);
+    minShift       = -maxShift; // percentage to calculate shift in px
+    minShiftPx     = fontSize * minShift / 100; // calculate shift in px based on font size
+    maxShiftPx     = fontSize * maxShift / 100; // cal
+
+  a = a+inc;
+}
+  // mouse interaction
+ $(window).mousemove(function(e) {
+      mouseY = e.clientY;
+    });
+
   createDivs();
 
   $original.addClass('active');
