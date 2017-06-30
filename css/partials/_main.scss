@@ -20,7 +20,6 @@ body {
 }
 
 .entry-content {
-  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 
@@ -28,7 +27,7 @@ body {
     @include default-link;
   }
 
-  @include breakpoint(xl) {
-    max-width: 1020px;
+  @include breakpoint(sm) {
+    max-width: 69vw;
   }
 }

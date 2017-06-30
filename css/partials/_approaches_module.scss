@@ -6,15 +6,11 @@
   margin: 4em auto 0;
   text-align: center;
   width: 80%;
-  max-width: 570px;
 
   @include breakpoint(sm) {
     width: auto;
     margin-top: 150px;
-  }
-
-  @include breakpoint(xl) {
-    max-width: 640px;
+    max-width: 46vw;
   }
 }
 

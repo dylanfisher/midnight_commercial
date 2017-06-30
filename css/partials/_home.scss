@@ -57,13 +57,14 @@
 }
 
 .home-page-tagline {
-  max-width: 540px;
+  max-width: 420px;
   margin: 1em auto 0;
   text-align: center;
   padding: 0 20px;
 
-  @include breakpoint(xl) {
-    max-width: 620px;
+  @include breakpoint(sm) {
+    max-width: 32vw;
+    padding: 0;
   }
 }
 
