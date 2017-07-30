@@ -10,37 +10,47 @@ $(function() {
 
     var $videos = $('.project-collage__video__iframe');
 
-    if ( $videos.length ) {
-      var players = [];
+    if ( !$videos.length ) return;
 
-      $videos.each(function() {
+    var players = [];
+
+    $videos.each(function() {
+      var $video = $(this);
+      var iframe = $video.get(0);
+      var player = new Vimeo.Player(iframe);
+
+      players.push( player );
+    });
+
+    $(window).on('scroll mc:projectCollageVideoInit', function() {
+      $videos.each(function(index) {
         var $video = $(this);
-        var iframe = $video.get(0);
-        var player = new Vimeo.Player(iframe);
 
-        players.push( player );
-
-        player.play().then(function() {
-          if ( !$video.visible(true) ) {
-            player.pause();
-          }
-          $(window).trigger('mc:projectCollageVideoInit');
-        });
+        if ( $video.visible(true) ) {
+          players[index].play();
+        } else {
+          players[index].pause();
+        }
       });
+    });
 
-      $(window).on('scroll mc:projectCollageVideoInit', function() {
-        $videos.each(function(index) {
+    $(window).trigger('mc:projectCollageVideoInit');
+
+    $(window).on('load', function() {
+      setTimeout(function() {
+        $videos.filter(function() {
+          return !$(this).visible(true);
+        }).each(function(index) {
           var $video = $(this);
+          var player = players[index];
 
-          if ( $video.visible(true) ) {
-            players[index].play();
-          } else {
-            players[index].pause();
-          }
+          $(this).delay(1000 * index).queue(function() {
+            player.play().then(function() {
+              player.pause();
+            });
+          });
         });
-      });
-
-      $(window).trigger('mc:projectCollageVideoInit');
-    }
+      }, 1000);
+    });
   }
 });
