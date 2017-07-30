@@ -4,7 +4,7 @@
 
 .home-page-splash-area {
   height: 100vh;
-  margin-bottom: 180px - $header-height - 20px;
+  margin-bottom: calc(180px - #{$header-height} - 20px);
 }
 
 .home-page-tagline-logo-area {
@@ -93,5 +93,5 @@
 }
 
 .work-anchor-link {
-  padding-top: $header-height + 20px;
+  padding-top: calc(#{$header-height} + 20px);
 }
