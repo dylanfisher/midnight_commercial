@@ -1201,13 +1201,14 @@ $(function() {
           var $video = $(this);
           var player = players[index];
 
-          $(this).delay(1000 * index).queue(function() {
+          $(this).delay(250 * index).queue(function() {
             player.play().then(function() {
               player.pause();
+              $(window).trigger('mc:projectCollageVideoInit');
             });
           });
         });
-      }, 1000);
+      }, 250);
     });
   }
 });
