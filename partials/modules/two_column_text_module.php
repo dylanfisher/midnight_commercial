@@ -5,7 +5,7 @@
         <div class="two-column-text-module__col-left col-sm-6">
           <?php the_sub_field( 'column_1' ); ?>
         </div>
-        <div class="two-column-text-module__col-left col-sm-6">
+        <div class="two-column-text-module__col-right col-sm-6">
           <?php the_sub_field( 'column_2' ); ?>
         </div>
       </div>

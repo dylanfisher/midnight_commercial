@@ -7,5 +7,12 @@
 
   @include breakpoint(sm) {
     margin-bottom: 0;
+    padding-left: 0;
+  }
+}
+
+.two-column-text-module__col-right {
+  @include breakpoint(sm) {
+    padding-right: 0;
   }
 }
