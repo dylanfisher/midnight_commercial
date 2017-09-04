@@ -1,0 +1,43 @@
+{
+    "key": "group_59adb32f9d639",
+    "title": "Project Sidebar",
+    "fields": [
+        {
+            "key": "field_59adb33531f2c",
+            "label": "Hidden from front page",
+            "name": "hidden_from_front_page",
+            "type": "true_false",
+            "instructions": "This post will not display on the home page but is still accessible to users with the direct link.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "project"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1504555919
+}

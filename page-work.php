@@ -52,7 +52,20 @@
       'posts_per_page' => 6,
       'orderby' => 'date',
       'post_status' => $post_status,
-      'paged' => $paged
+      'paged' => $paged,
+      'meta_query' => array(
+        'relation' => 'OR',
+        array(
+          'key' => 'hidden_from_front_page',
+          'value' => '1',
+          'compare' => '!=',
+          'type' => 'BOOLEAN'
+        ),
+        array(
+          'key' => 'hidden_from_front_page',
+          'compare' => 'NOT EXISTS'
+        )
+      )
     );
 
     $the_query = new WP_Query( $args );
