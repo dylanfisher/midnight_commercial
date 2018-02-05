@@ -8,11 +8,11 @@
 <?php ob_start(); ?>
   <a href="<?php the_permalink(); ?>" class="collage-link">
     <h2><?php the_title(); ?></h2>
-    <?php if ( get_field( 'client' ) ): ?>
-      <p>
+    <p>
+      <?php if ( get_field( 'client' ) ): ?>
         Client: <?php the_field( 'client' ); ?>
-      </p>
-    <?php endif; ?>
+      <?php endif; ?>
+    </p>
     <?php if ( get_field( 'one_sentence_description' ) ): ?>
       <p>
         <?php the_field( 'one_sentence_description' ); ?>
