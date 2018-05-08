@@ -13,7 +13,7 @@
 <div class="project-collage__video responsive-embed-wrapper" style="<?php echo $style; ?>">
   <?php
     $video_embed_url = get_sub_field('video');
-    preg_match( '/src=".*?vimeo.com\/video\/(\d*)"/', $video_embed_url, $matches );
+    preg_match( '/src=".*?vimeo.com\/video\/(\d*)("|\?)?/', $video_embed_url, $matches );
     if ( array_key_exists( 1, $matches ) ):
       $video_id = $matches[1];
       if ( !empty( $video_id ) ):
